@@ -28,4 +28,30 @@ public class DifferTest {
                 "}";
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void emptyTest1() {
+        Map<String, Object> cleanFile1 = new TreeMap<>();
+        Map<String, Object> cleanFile2 = new TreeMap<>(Map.of("timeout", 20,
+                "verbose", true,
+                "host", "hexlet.io"));
+
+        String actual = Differ.generate(cleanFile1, cleanFile2);
+        String expected = "{\n" +
+                "    host: hexlet.io\n" +
+                "    timeout: 20\n" +
+                "    verbose: true\n" +
+                "}";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void emptyTest2() {
+        Map<String, Object> cleanFile1 = new TreeMap<>();
+        Map<String, Object> cleanFile2 = new TreeMap<>();
+
+        String actual = Differ.generate(cleanFile1, cleanFile2);
+        String expected = "{}";
+        assertEquals(expected, actual);
+    }
 }
