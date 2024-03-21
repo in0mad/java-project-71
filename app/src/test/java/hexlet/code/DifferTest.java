@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,17 +8,25 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class DifferTest {
+    Map<String, Object> testFile1;
+    Map<String, Object> testFile2;
+    @BeforeEach
+    public void beforeEach() {
+        testFile1 = new TreeMap<>();
+        testFile2 = new TreeMap<>();
+    }
+
     @Test
     public void cleanTest() {
-        Map<String, Object> cleanFile1 = new TreeMap<>(Map.of("host", "hexlet.io",
+        testFile1.putAll((Map.of("host", "hexlet.io",
                 "timeout", 50,
                 "proxy", "123.234.53.22",
-                "follow", false));
-        Map<String, Object> cleanFile2 = new TreeMap<>(Map.of("timeout", 20,
+                "follow", false)));
+        testFile2.putAll((Map.of("timeout", 20,
                 "verbose", true,
-                "host", "hexlet.io"));
+                "host", "hexlet.io")));
 
-        String actual = Differ.generate(cleanFile1, cleanFile2);
+        String actual = Differ.generate(testFile1, testFile2);
         String expected = "{\n" +
                 "  - follow: false\n" +
                 "    host: hexlet.io\n" +
@@ -30,28 +39,61 @@ public class DifferTest {
     }
 
     @Test
+    public void cleanTest2() {
+        testFile1.putAll((Map.of("timeout", 20,
+                "verbose", true,
+                "host", "hexlet.io")));
+        testFile2.putAll((Map.of("host", "hexlet.io",
+                "timeout", 50,
+                "proxy", "123.234.53.22",
+                "follow", false)));
+        String actual = Differ.generate(testFile1, testFile2);
+        String expected = "{\n" +
+                "  + follow: false\n" +
+                "    host: hexlet.io\n" +
+                "  + proxy: 123.234.53.22\n" +
+                "  - timeout: 20\n" +
+                "  + timeout: 50\n" +
+                "  - verbose: true\n" +
+                "}";
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void emptyTest1() {
-        Map<String, Object> cleanFile1 = new TreeMap<>();
-        Map<String, Object> cleanFile2 = new TreeMap<>(Map.of("timeout", 20,
+        testFile1 = new TreeMap<>();
+        testFile2.putAll(Map.of("timeout", 20,
                 "verbose", true,
                 "host", "hexlet.io"));
 
-        String actual = Differ.generate(cleanFile1, cleanFile2);
+        String actual = Differ.generate(testFile1, testFile2);
         String expected = "{\n" +
-                "    host: hexlet.io\n" +
-                "    timeout: 20\n" +
-                "    verbose: true\n" +
+                "  + host: hexlet.io\n" +
+                "  + timeout: 20\n" +
+                "  + verbose: true\n" +
                 "}";
         assertEquals(expected, actual);
     }
 
     @Test
     public void emptyTest2() {
-        Map<String, Object> cleanFile1 = new TreeMap<>();
-        Map<String, Object> cleanFile2 = new TreeMap<>();
+        testFile1.putAll(Map.of("timeout", 20,
+                "verbose", true,
+                "host", "hexlet.io"));
+        testFile2 = new TreeMap<>();
+        String actual = Differ.generate(testFile1, testFile2);
+        String expected = "{\n" +
+                "  - host: hexlet.io\n" +
+                "  - timeout: 20\n" +
+                "  - verbose: true\n" +
+                "}";
+        assertEquals(expected, actual);
+    }
 
-        String actual = Differ.generate(cleanFile1, cleanFile2);
-        String expected = "{}";
+    @Test
+    public void emptyTest3() {
+        String actual = Differ.generate(testFile1, testFile2);
+        String expected = "{\n}";
         assertEquals(expected, actual);
     }
 }
