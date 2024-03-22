@@ -9,3 +9,5 @@ clean:
 
 lint: #Chech a style of code via Checkstyle
 	./gradlew checkstyleMain
+
+.PHONY: build
