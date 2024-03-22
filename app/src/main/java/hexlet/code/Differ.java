@@ -1,10 +1,12 @@
 package hexlet.code;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Differ {
-    public static String generate (Map<String, Object> dataFile1, Map<String, Object> dataFile2) {
+    public static String generate(Map<String, Object> dataFile1, Map<String, Object> dataFile2) {
         if (dataFile1.isEmpty() && dataFile2.isEmpty()) {
             return "{\n}";
         }
@@ -21,10 +23,10 @@ public class Differ {
                     Object valueFile2 = dataFile2.get(key);
                     String returned;
                     if (dataFile1.containsKey(key) && dataFile2.containsKey(key)) { //if value is changed
-                        returned = valueFile1.equals(valueFile2) ?
-                                String.format("  %s: %s", key, valueFile1) :
-                                String.format("- %s: %s\n" +
-                                        "  + %s: %s", key, valueFile1, key, valueFile2);
+                        returned = valueFile1.equals(valueFile2)
+                                ? String.format("  %s: %s", key, valueFile1)
+                                : String.format("- %s: %s\n"
+                                + "  + %s: %s", key, valueFile1, key, valueFile2);
                     } else if (dataFile1.containsKey(key) && !dataFile2.containsKey(key)) {
                         returned = String.format("- %s: %s", key, valueFile1);
                     } else if (!dataFile1.containsKey(key) && dataFile2.containsKey(key)) {

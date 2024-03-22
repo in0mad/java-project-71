@@ -26,7 +26,7 @@ public class App implements Callable<Integer> {
     private String filepath2;
 
     @Override
-    public Integer call() throws Exception{
+    public Integer call() throws Exception {
         Path absolutePath1 = Paths.get(filepath1).toAbsolutePath().normalize();
         if (!Files.exists(absolutePath1)) {
             throw new Exception(String.format("%s: No such file", filepath1));
@@ -37,9 +37,9 @@ public class App implements Callable<Integer> {
         }
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> dataFile1 = objectMapper.
-                readValue(absolutePath1.toUri().toURL(), new TypeReference<>() {});
+                readValue(absolutePath1.toUri().toURL(), new TypeReference<>() { });
         Map<String, Object> dataFile2 = objectMapper.
-                readValue(absolutePath2.toUri().toURL(), new TypeReference<>() {});
+                readValue(absolutePath2.toUri().toURL(), new TypeReference<>() { });
         System.out.println(Differ.generate(dataFile1, dataFile2));
         return 0;
     }
@@ -48,8 +48,7 @@ public class App implements Callable<Integer> {
         try {
             int exitCode = new CommandLine(new App()).execute(args);
             System.exit(exitCode);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }

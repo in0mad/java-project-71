@@ -27,14 +27,14 @@ public class DifferTest {
                 "host", "hexlet.io")));
 
         String actual = Differ.generate(testFile1, testFile2);
-        String expected = "{\n" +
-                "  - follow: false\n" +
-                "    host: hexlet.io\n" +
-                "  - proxy: 123.234.53.22\n" +
-                "  - timeout: 50\n" +
-                "  + timeout: 20\n" +
-                "  + verbose: true\n" +
-                "}";
+        String expected = "{\n"
+                + "  - follow: false\n"
+                + "    host: hexlet.io\n"
+                + "  - proxy: 123.234.53.22\n"
+                + "  - timeout: 50\n"
+                + "  + timeout: 20\n"
+                + "  + verbose: true\n"
+                + "}";
         assertEquals(expected, actual);
     }
 
@@ -48,14 +48,14 @@ public class DifferTest {
                 "proxy", "123.234.53.22",
                 "follow", false)));
         String actual = Differ.generate(testFile1, testFile2);
-        String expected = "{\n" +
-                "  + follow: false\n" +
-                "    host: hexlet.io\n" +
-                "  + proxy: 123.234.53.22\n" +
-                "  - timeout: 20\n" +
-                "  + timeout: 50\n" +
-                "  - verbose: true\n" +
-                "}";
+        String expected = "{\n"
+                + "  + follow: false\n"
+                + "    host: hexlet.io\n"
+                + "  + proxy: 123.234.53.22\n"
+                + "  - timeout: 20\n"
+                + "  + timeout: 50\n"
+                + "  - verbose: true\n"
+                + "}";
         assertEquals(expected, actual);
     }
 
@@ -67,11 +67,11 @@ public class DifferTest {
                 "host", "hexlet.io"));
 
         String actual = Differ.generate(testFile1, testFile2);
-        String expected = "{\n" +
-                "  + host: hexlet.io\n" +
-                "  + timeout: 20\n" +
-                "  + verbose: true\n" +
-                "}";
+        String expected = "{\n"
+                + "  + host: hexlet.io\n"
+                + "  + timeout: 20\n"
+                + "  + verbose: true\n"
+                + "}";
         assertEquals(expected, actual);
     }
 
@@ -82,11 +82,11 @@ public class DifferTest {
                 "host", "hexlet.io"));
         testFile2 = new TreeMap<>();
         String actual = Differ.generate(testFile1, testFile2);
-        String expected = "{\n" +
-                "  - host: hexlet.io\n" +
-                "  - timeout: 20\n" +
-                "  - verbose: true\n" +
-                "}";
+        String expected = "{\n"
+                + "  - host: hexlet.io\n"
+                + "  - timeout: 20\n"
+                + "  - verbose: true\n"
+                + "}";
         assertEquals(expected, actual);
     }
 

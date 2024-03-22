@@ -3,7 +3,7 @@ plugins {
     id("io.freefair.lombok") version "8.4"
     application
     `java-library`
-    checkstyle
+    id("checkstyle")
 }
 
 group = "hexlet.code"
@@ -21,6 +21,8 @@ dependencies {
     implementation("info.picocli:picocli:4.7.5")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.17.0")
+    implementation("com.puppycrawl.tools:checkstyle:10.14.2")
+
 
 }
 
