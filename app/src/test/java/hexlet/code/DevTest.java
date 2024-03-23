@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class DifferTest {
+public class DevTest {
     Map<String, Object> testFile1;
     Map<String, Object> testFile2;
     @BeforeEach
