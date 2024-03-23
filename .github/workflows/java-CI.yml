@@ -25,13 +25,18 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
       working-directory: app
-    - name: Make a JaCoCo report
-      run: ./gradlew jacocoTestReport
-      working-directory: app
+    #- name: Make a JaCoCo report
+    #  run: ./gradlew jacocoTestReport
+    #  working-directory: app
     - name: Push a JaCoCo report
       uses: paambaati/codeclimate-action@v5.0.0
       env:
         CC_TEST_REPORTER_ID:: ${{secrets.CC_TEST_REPORTER_ID}}
+      with: 
+      # The report file must be there, otherwise Code Climate won't find it
+        coverageCommand: ./gradlew jacocoTestReport
+        working-directory: app
+        #coverageLocations: ${{github.workspace}}/target/site/jacoco/jacoco.xml:jacoco
 
     # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
     # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
