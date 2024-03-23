@@ -1,3 +1,5 @@
+import com.adarshr.gradle.testlogger.theme.ThemeType
+
 plugins {
     id("java")
     id("io.freefair.lombok") version "8.4"
@@ -5,6 +7,7 @@ plugins {
     `java-library`
     id("checkstyle")
     id("com.adarshr.test-logger") version "4.0.0"
+    jacoco
 
 }
 
@@ -44,4 +47,15 @@ application {
 
 testlogger {
     showFullStackTraces = true
+    theme = ThemeType.MOCHA
+}
+
+//tasks.test {
+//    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+//}
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+    reports {
+        xml.required = true
+    }
 }

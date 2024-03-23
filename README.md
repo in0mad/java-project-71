@@ -31,6 +31,18 @@ make run-dist
 make lint
 ```
 
+## Make JaCoCo Report
+
+```bash
+make report
+```
+
+## Launch the Test
+
+```bash
+make test
+```
+
 ## The Multiple Runtime Version Manager *asdf*
 
 On *nix and macOS to manage Java versions we recommend using asdf https://github.com/asdf-vm/asdf.
