@@ -35,7 +35,7 @@ jobs:
       with: 
       # The report file must be there, otherwise Code Climate won't find it
         coverageCommand: ./gradlew jacocoTestReport
-        working-directory: app
+        workingDirectory: app
         #coverageLocations: ${{github.workspace}}/target/site/jacoco/jacoco.xml:jacoco
 
     # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
