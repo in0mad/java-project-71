@@ -29,9 +29,9 @@ jobs:
       run: ./gradlew jacocoTestReport
       working-directory: app
     - name: Push a JaCoCo report
-      uses: paambaati/codeclimate-action@v2.2.4
-      with: # Set the secret as an input
-        super_secret: ${{ secrets.CC_TEST_REPORTER_ID }}
+      uses: paambaati/codeclimate-action@v5.0.0
+      env:
+        CC_TEST_REPORTER_ID:: ${{secrets.CC_TEST_REPORTER_ID}}
 
     # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
     # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
