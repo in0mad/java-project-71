@@ -1,7 +1,6 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -10,7 +9,6 @@ import picocli.CommandLine.Parameters;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true,
@@ -35,12 +33,7 @@ public class App implements Callable<Integer> {
         if (!Files.exists(absolutePath2)) {
             throw new Exception(String.format("%s: No such file", filepath2));
         }
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> dataFile1 = objectMapper.
-                readValue(absolutePath1.toUri().toURL(), new TypeReference<>() { });
-        Map<String, Object> dataFile2 = objectMapper.
-                readValue(absolutePath2.toUri().toURL(), new TypeReference<>() { });
-        System.out.println(Differ.generate(dataFile1, dataFile2));
+        System.out.println(Differ.generate(absolutePath1, absolutePath2));
         return 0;
     }
 
