@@ -47,7 +47,6 @@ make test
  
 [![asciicast](https://asciinema.org/a/d7a2M7FgKVHPM4WRpyVHu6Hwt.svg)](https://asciinema.org/a/d7a2M7FgKVHPM4WRpyVHu6Hwt)
 
-
 ## The Multiple Runtime Version Manager *asdf*
 
 On *nix and macOS to manage Java versions we recommend using asdf https://github.com/asdf-vm/asdf.
