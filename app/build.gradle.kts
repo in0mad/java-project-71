@@ -28,6 +28,8 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.17.0")
     implementation("com.puppycrawl.tools:checkstyle:10.14.2")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.16.1")
+
 
 
 

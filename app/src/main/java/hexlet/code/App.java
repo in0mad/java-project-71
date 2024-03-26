@@ -33,7 +33,7 @@ public class App implements Callable<Integer> {
         if (!Files.exists(absolutePath2)) {
             throw new Exception(String.format("%s: No such file", filepath2));
         }
-        System.out.println(Differ.generate(absolutePath1, absolutePath2));
+        System.out.println(Differ.generate(absolutePath1, absolutePath2, format));
         return 0;
     }
 
