@@ -18,10 +18,10 @@ public class App implements Callable<Integer> {
     private String format = "stylish";
 
     @Parameters(index = "0", description = "path to first file", paramLabel = "filepath1")
-    private String filepath1;
+    private static String filepath1;
 
     @Parameters(index = "1", description = "path to second file", paramLabel = "filepath2")
-    private String filepath2;
+    private static String filepath2;
 
     @Override
     public Integer call() throws Exception {

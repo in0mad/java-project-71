@@ -1,8 +1,10 @@
 test: #A build of the app
 	./gradlew test
 
+file1 := filepath1
+file2 := filepath2
 run-dist: #Launch of the program
-	./build/install/app/bin/app
+	./build/install/app/bin/app $(file1) $(file2)
 
 build: #A build of the app
 	./gradlew installDist
