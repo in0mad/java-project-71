@@ -45,7 +45,7 @@ make test
 
 ### Demo of comparinig two *json* files
  
-https://asciinema.org/a/d7a2M7FgKVHPM4WRpyVHu6Hwt
+[![asciicast](https://asciinema.org/a/d7a2M7FgKVHPM4WRpyVHu6Hwt.svg)](https://asciinema.org/a/d7a2M7FgKVHPM4WRpyVHu6Hwt)
 
 
 ## The Multiple Runtime Version Manager *asdf*
