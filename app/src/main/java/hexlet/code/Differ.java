@@ -12,6 +12,9 @@ public class Differ {
         if (dataFile1.isEmpty() && dataFile2.isEmpty()) {
             return "{\n}";
         }
+        Map<String, String> keyInfo = Representation.collectKeyStatus(dataFile1, dataFile2);
+        System.out.println(keyInfo);
+
         var keySet1 = dataFile1.keySet();
         var keySet2 = dataFile2.keySet();
         Set<String> unionKeySet = new TreeSet<>();
@@ -19,7 +22,7 @@ public class Differ {
         unionKeySet.addAll(keySet2);
         return switch (format) {
             case "stylish" -> Formatters.stylish(dataFile1, dataFile2, unionKeySet);
-            case "default" -> Formatters.defaultFormat(dataFile1, dataFile2, unionKeySet);
+            case "simple" -> Formatters.simpleFormat(dataFile1, dataFile2, unionKeySet);
             default -> "unsupported format";
         };
     }

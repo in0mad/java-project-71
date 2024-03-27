@@ -17,8 +17,8 @@ public class JsonTest {
     @BeforeEach
     public void beforeEach() {
         assertTrue(resourceDirectory.endsWith("src/test/resources"));
-        toJson1 = Paths.get(resourceDirectory, "json-nested1.json").toAbsolutePath();
-        toJson2 = Paths.get(resourceDirectory, "json-nested2.json").toAbsolutePath();
+        toJson1 = Paths.get(resourceDirectory, "json1.json").toAbsolutePath();
+        toJson2 = Paths.get(resourceDirectory, "json2.json").toAbsolutePath();
         toEmptyJson = Paths.get(resourceDirectory, "json-empty.json").toAbsolutePath();
     }
 

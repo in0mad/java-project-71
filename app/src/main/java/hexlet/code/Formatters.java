@@ -5,14 +5,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Formatters {
-    public static String defaultFormat(Map<String, Object> dataFile1, Map<String, Object> dataFile2,
+    public static String simpleFormat(Map<String, Object> dataFile1, Map<String, Object> dataFile2,
                                        Set<String> unionKeySet) {
         return unionKeySet.stream()
                 .map(key -> {
                     Object valueFile1 = dataFile1.get(key);
                     Object valueFile2 = dataFile2.get(key);
                     String returned;
-                    if (dataFile1.containsKey(key) && dataFile2.containsKey(key)) { //if value is changed
+                    if (dataFile1.containsKey(key) && dataFile2.containsKey(key)) {
                         returned = valueFile1.equals(valueFile2)
                                 ? String.format("  %s: %s", key, valueFile1)
                                 : String.format("- %s: %s\n"
