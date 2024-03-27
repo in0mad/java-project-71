@@ -25,6 +25,6 @@ public class Differ {
     }
 
     public static String generate(Path absolutePath1, Path absolutePath2) throws Exception {
-        return generate(absolutePath1, absolutePath2, "default");
+        return generate(absolutePath1, absolutePath2, "stylish");
     }
 }

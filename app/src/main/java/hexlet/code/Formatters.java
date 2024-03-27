@@ -33,23 +33,38 @@ public class Formatters {
                                        Set<String> unionKeySet) {
         return unionKeySet.stream()
                 .map(key -> {
-                    Object valueFile1 = dataFile1.get(key);
-                    Object valueFile2 = dataFile2.get(key);
+                    Object valueFile1 = dataFile1.getOrDefault(key, "");
+                    Object valueFile2 = dataFile2.getOrDefault(key, "");
                     String returned;
-                    if (dataFile1.containsKey(key) && dataFile2.containsKey(key)) { //if value is changed
-                        returned = valueFile1.equals(valueFile2)
-                                ? String.format("  %s: %s", key, valueFile1)
-                                : String.format("- %s: %s\n"
-                                + "  + %s: %s", key, valueFile1, key, valueFile2);
-                    } else if (dataFile1.containsKey(key) && !dataFile2.containsKey(key)) {
-                        returned = String.format("- %s: %s", key, valueFile1);
-                    } else if (!dataFile1.containsKey(key) && dataFile2.containsKey(key)) {
-                        returned = String.format("+ %s: %s", key, valueFile2);
+                    if (valueFile1 == null || valueFile2 == null) {
+                        returned = nullHandler(valueFile1, valueFile2, key);
                     } else {
-                        returned = String.format("- %s: %s", key, valueFile1);
+                        if (dataFile1.containsKey(key) && dataFile2.containsKey(key)) { //if value is changed
+                            returned = valueFile1.equals(valueFile2)
+                                    ? String.format("  %s: %s", key, valueFile1.toString())
+                                    : String.format("- %s: %s\n"
+                                    + "  + %s: %s", key, valueFile1, key, valueFile2.toString());
+//                        }
+                        } else if (dataFile1.containsKey(key) && !dataFile2.containsKey(key)) {
+                            returned = String.format("- %s: %s", key, valueFile1.toString());
+                        } else {
+                            returned = String.format("+ %s: %s", key, valueFile2.toString());
+                        }
                     }
                     return returned;
                 })
                 .collect(Collectors.joining("\n  ", "{\n  ", "\n}"));
+    }
+
+    public static String nullHandler(Object valueFile1, Object valueFile2, String key) {
+        if (valueFile1 == null && valueFile2 != null) {
+            return String.format("- %s: %s\n"
+                    + "  + %s: %s", key, null, key, valueFile2.toString());
+        } else if (valueFile1 != null && valueFile2 == null) {
+            return String.format("- %s: %s\n"
+                    + "  + %s: %s", key, valueFile1.toString(), key, null);
+        } else {
+            return String.format("  %s: %s", key, null);
+        }
     }
 }
