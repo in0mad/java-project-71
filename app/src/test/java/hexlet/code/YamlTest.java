@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class YamlTest {
-    private final String resourceDirectory = Paths.get("src","test", "resources").toString();
+    private final String resourceDirectory = Paths.get("src", "test", "resources").toString();
     Path toYaml1;
     Path toYaml2;
     Path toEmptyYaml;
