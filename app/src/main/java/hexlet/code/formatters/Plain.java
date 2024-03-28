@@ -6,24 +6,52 @@ import java.util.stream.Collectors;
 
 public class Plain {
     public static String plain(Map<String, Object> dataFile1, Map<String, Object> dataFile2,
-                                       Set<String> unionKeySet) {
-        return unionKeySet.stream()
+                                 Map<String, String> keyStatus) {
+//    return unionKeySet.stream()
+//            .map(key -> {
+//                Object valueFile1;
+//                Object valueFile2;
+//                String returned;
+//                if (dataFile1.containsKey(key) && dataFile2.containsKey(key)) {
+//                    valueFile1 = dataFile1.get(key);
+//                    valueFile2 = dataFile2.get(key);
+//                    if (valueFile1 == null || valueFile2 == null) {
+//                        returned = nullHandler(valueFile1, valueFile2, key);
+//                    } else {
+//                        returned = valueFile1.equals(valueFile2)
+//                            ? String.format("  %s: %s", key, valueFile1.toString())
+//                            : String.format("- %s: %s\n"
+//                            + "  + %s: %s", key, valueFile1, key, valueFile2.toString());
+//                    }
+//                } else if (dataFile1.containsKey(key) && !dataFile2.containsKey(key)) {
+//                    returned = dataFile1.get(key) == null
+//                            ? String.format("- %s: %s", key, null)
+//                            : String.format("- %s: %s", key, dataFile1.get(key).toString());
+//                } else {
+//                    returned = dataFile2.get(key) == null
+//                            ? String.format("+ %s: %s", key, null)
+//                            : String.format("+ %s: %s", key, dataFile2.get(key).toString());
+//                }
+//                return returned;
+//            })
+//            .collect(Collectors.joining("\n  ", "{\n  ", "\n}"));
+        return keyStatus.keySet().stream()
                 .map(key -> {
                     Object valueFile1;
                     Object valueFile2;
                     String returned;
-                    if (dataFile1.containsKey(key) && dataFile2.containsKey(key)) {
+                    if (keyStatus.get(key).equals("unchanged") || keyStatus.get(key).equals("updated")) {
                         valueFile1 = dataFile1.get(key);
                         valueFile2 = dataFile2.get(key);
                         if (valueFile1 == null || valueFile2 == null) {
                             returned = nullHandler(valueFile1, valueFile2, key);
                         } else {
                             returned = valueFile1.equals(valueFile2)
-                                ? String.format("  %s: %s", key, valueFile1.toString())
-                                : String.format("- %s: %s\n"
-                                + "  + %s: %s", key, valueFile1, key, valueFile2.toString());
+                                    ? String.format("  %s: %s", key, valueFile1.toString())
+                                    : String.format("- %s: %s\n"
+                                    + "  + %s: %s", key, valueFile1, key, valueFile2.toString());
                         }
-                    } else if (dataFile1.containsKey(key) && !dataFile2.containsKey(key)) {
+                    } else if (keyStatus.get(key).equals("removed")) {
                         returned = dataFile1.get(key) == null
                                 ? String.format("- %s: %s", key, null)
                                 : String.format("- %s: %s", key, dataFile1.get(key).toString());

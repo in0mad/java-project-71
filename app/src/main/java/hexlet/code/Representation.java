@@ -22,7 +22,7 @@ public class Representation {
                 valueFile1 = dataFile1.get(key);
                 valueFile2 = dataFile2.get(key);
                 if (valueFile1 == null || valueFile2 == null) {
-                    returned = localNullHandler(valueFile1, valueFile2);
+                    returned = valueFile1 == valueFile2 ? "unchanged" : "updated";
                 } else {
                     returned = valueFile1.equals(valueFile2) ? "unchanged" : "updated";
                 }
@@ -35,15 +35,5 @@ public class Representation {
         }));
         System.out.println();
         return keyMap;
-    }
-
-    public static String localNullHandler(Object valueFile1, Object valueFile2) {
-        if (valueFile1 == null && valueFile2 != null) {
-            return "added";
-        } else if (valueFile1 != null && valueFile2 == null) {
-            return "removed";
-        } else {
-            return "unchanged";
-        }
     }
 }
