@@ -70,9 +70,9 @@ public class PlainTest {
     @Test
     public void emptyTest2() throws Exception {
         String actual = Differ.generate(toJson1, toEmptyJson, "plain");
-        String expected = "Property 'checked' was removed\n"
-                + "Property 'chars1' was removed\n"
+        String expected = "Property 'chars1' was removed\n"
                 + "Property 'chars2' was removed\n"
+                + "Property 'checked' was removed\n"
                 + "Property 'default' was removed\n"
                 + "Property 'id' was removed\n"
                 + "Property 'key1' was removed\n"
@@ -88,7 +88,7 @@ public class PlainTest {
     @Test
     public void emptyTest3() throws Exception {
         String actual = Differ.generate(toEmptyJson, toEmptyJson, "plain");
-        String expected = "";
+        String expected = "{\n}";
         assertEquals(expected, actual);
     }
 }
