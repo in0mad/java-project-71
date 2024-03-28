@@ -24,7 +24,7 @@ public class PlainTest {
 
     @Test
     public void cleanTest() throws Exception {
-        String actual = Differ.generate(toJson1, toJson2);
+        String actual = Differ.generate(toJson1, toJson2, "plain");
         String expected = "Property 'chars2' was updated. From [complex value] to false\n"
                 + "Property 'checked' was updated. From false to true\n"
                 + "Property 'default' was updated. From null to [complex value]\n"
@@ -51,9 +51,9 @@ public class PlainTest {
     @Test
     public void emptyTest1() throws Exception {
         String actual = Differ.generate(toEmptyJson, toJson2, "plain");
-        String expected = "Property 'checked' was added with value: 'true'\n"
-                + "Property 'chars1' was added with value: [complex value]\n"
+        String expected = "Property 'chars1' was added with value: [complex value]\n"
                 + "Property 'chars2' was added with value: 'false'\n"
+                + "Property 'checked' was added with value: 'true'\n"
                 + "Property 'default' was added with value: [complex value]\n"
                 + "Property 'id' was added with value: 'null'\n"
                 + "Property 'key2' was added with value: 'value2'\n"
