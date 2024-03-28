@@ -5,8 +5,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import static hexlet.code.Formatters.nullHandler;
-
 public class Representation {
     public static Map<String, String> collectKeyStatus(Map<String, Object> dataFile1, Map<String, Object> dataFile2) {
         var keySet1 = dataFile1.keySet();
@@ -24,7 +22,7 @@ public class Representation {
                 valueFile1 = dataFile1.get(key);
                 valueFile2 = dataFile2.get(key);
                 if (valueFile1 == null || valueFile2 == null) {
-                    returned = nullHandler(valueFile1, valueFile2, key);
+                    returned = localNullHandler(valueFile1, valueFile2);
                 } else {
                     returned = valueFile1.equals(valueFile2) ? "unchanged" : "updated";
                 }
@@ -35,6 +33,17 @@ public class Representation {
             }
             return returned;
         }));
+        System.out.println();
         return keyMap;
+    }
+
+    public static String localNullHandler(Object valueFile1, Object valueFile2) {
+        if (valueFile1 == null && valueFile2 != null) {
+            return "added";
+        } else if (valueFile1 != null && valueFile2 == null) {
+            return "removed";
+        } else {
+            return "unchanged";
+        }
     }
 }

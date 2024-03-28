@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import hexlet.code.formatters.Formatter;
+
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Set;
@@ -21,8 +23,8 @@ public class Differ {
         unionKeySet.addAll(keySet1);
         unionKeySet.addAll(keySet2);
         return switch (format) {
-            case "stylish" -> Formatters.stylish(dataFile1, dataFile2, unionKeySet);
-            case "simple" -> Formatters.simpleFormat(dataFile1, dataFile2, unionKeySet);
+            case "stylish" -> Formatter.stylish(dataFile1, dataFile2, unionKeySet);
+            case "plain" -> Formatter.plain(dataFile1, dataFile2, unionKeySet);
             default -> "unsupported format";
         };
     }
