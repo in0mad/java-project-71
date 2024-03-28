@@ -46,7 +46,7 @@ public class Plain {
         if (valueFile1 == null && valueFile2 != null) {
             return String.format("Property '%s' was added. With value %s", key, complexCheck(valueFile2));
         } else if (valueFile1 != null && valueFile2 == null) {
-            return String.format("Property '%s' was removed", key);
+            return String.format("Property '%s' was updated. From %s to %s", key, valueFile1.toString(), null);
         } else {
             return "";
         }
