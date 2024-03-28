@@ -33,7 +33,6 @@ public class Representation {
             }
             return returned;
         }));
-        System.out.println();
         return keyMap;
     }
 }

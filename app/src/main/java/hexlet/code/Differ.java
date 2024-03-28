@@ -11,7 +11,6 @@ public class Differ {
             return "{\n}";
         }
         Map<String, String> keyInfo = Representation.collectKeyStatus(dataFile1, dataFile2);
-        System.out.println(keyInfo);
 
         return switch (format) {
             case "stylish" -> Formatter.stylish(dataFile1, dataFile2, keyInfo);
