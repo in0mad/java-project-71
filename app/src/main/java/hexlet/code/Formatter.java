@@ -1,7 +1,9 @@
-package hexlet.code.formatters;
+package hexlet.code;
+
+import hexlet.code.formatters.Plain;
+import hexlet.code.formatters.Stylish;
 
 import java.util.Map;
-import java.util.Set;
 
 public class Formatter {
     public static String plain(Map<String, Object> dataFile1, Map<String, Object> dataFile2,

@@ -1,9 +1,8 @@
 package hexlet.code.formatters;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 public class Stylish {
     public static String stylish(Map<String, Object> dataFile1, Map<String, Object> dataFile2,

@@ -1,10 +1,6 @@
 package hexlet.code.formatters;
 
-import org.apache.commons.lang3.builder.EqualsExclude;
-
-import javax.lang.model.type.PrimitiveType;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Plain {
@@ -33,7 +29,7 @@ public class Plain {
                             returned = String.format("Property '%s' was added. With value: %s",
                                     key, null);
                         } else {
-                        returned = String.format("Property '%s' was added. With value: %s",
+                            returned = String.format("Property '%s' was added. With value: %s",
                                 key, complexCheck(valueFile2));
                         }
                     }
