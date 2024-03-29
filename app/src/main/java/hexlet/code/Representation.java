@@ -7,11 +7,8 @@ import java.util.TreeSet;
 
 public class Representation {
     public static Map<String, String> collectKeyStatus(Map<String, Object> dataFile1, Map<String, Object> dataFile2) {
-        var keySet1 = dataFile1.keySet();
-        var keySet2 = dataFile2.keySet();
-        Set<String> unionKeySet = new TreeSet<>();
-        unionKeySet.addAll(keySet1);
-        unionKeySet.addAll(keySet2);
+        Set<String> unionKeySet = new TreeSet<>(dataFile1.keySet());
+        unionKeySet.addAll(dataFile2.keySet());
 
         TreeMap<String, String> keyStatusMap = new TreeMap<>();
         unionKeySet.forEach(key -> keyStatusMap.compute(key, (k, v) -> {
