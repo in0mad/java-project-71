@@ -1,5 +1,6 @@
 package hexlet.code.formatters;
 
+import javax.lang.model.type.PrimitiveType;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -25,13 +26,8 @@ public class Plain {
                         returned = String.format("Property '%s' was removed", key);
                     } else {
                         valueFile2 = dataFile2.get(key);
-                        if (valueFile2 == null) {
-                            returned = String.format("Property '%s' was added. With value: %s",
-                                    key, null);
-                        } else {
-                            returned = String.format("Property '%s' was added. With value: %s",
+                        returned = String.format("Property '%s' was added with value: %s",
                                 key, complexCheck(valueFile2));
-                        }
                     }
                     return returned;
                 })
@@ -40,7 +36,7 @@ public class Plain {
 
     public static String nullHandler(Object valueFile1, Object valueFile2, String key) {
         if (valueFile1 == null && valueFile2 != null) {
-            return String.format("Property '%s' was added. With value %s", key, complexCheck(valueFile2));
+            return String.format("Property '%s' was updated. From %s to %s", key, null, complexCheck(valueFile2));
         } else if (valueFile1 != null && valueFile2 == null) {
             return String.format("Property '%s' was updated. From %s to %s", key, valueFile1.toString(), null);
         } else {
@@ -49,6 +45,14 @@ public class Plain {
     }
 
     public static String complexCheck(Object obj) {
-        return obj.getClass().isArray() ? "[complex value]" : String.format("%s", obj);
+        if (obj == null) {
+            return "null";
+        } else if (obj instanceof String) {
+            return String.format("'%s'", obj);
+        } else if (obj instanceof Number || obj instanceof Boolean) {
+            return obj.toString();
+        } else {
+            return "[complex value]";
+        }
     }
 }

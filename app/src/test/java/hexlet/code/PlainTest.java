@@ -52,17 +52,17 @@ public class PlainTest {
     public void emptyTest1() throws Exception {
         String actual = Differ.generate(toEmptyJson, toJson2, "plain");
         String expected = "Property 'chars1' was added with value: [complex value]\n"
-                + "Property 'chars2' was added with value: 'false'\n"
-                + "Property 'checked' was added with value: 'true'\n"
+                + "Property 'chars2' was added with value: false\n"
+                + "Property 'checked' was added with value: true\n"
                 + "Property 'default' was added with value: [complex value]\n"
-                + "Property 'id' was added with value: 'null'\n"
+                + "Property 'id' was added with value: null\n"
                 + "Property 'key2' was added with value: 'value2'\n"
                 + "Property 'numbers1' was added with value: [complex value]\n"
                 + "Property 'numbers2' was added with value: [complex value]\n"
                 + "Property 'numbers4' was added with value: [complex value]\n"
-                + "Property 'obj1' was added with value: '[complex value]'\n"
+                + "Property 'obj1' was added with value: [complex value]\n"
                 + "Property 'setting1' was added with value: 'Another value'\n"
-                + "Property 'setting2' was added with value: '300'\n"
+                + "Property 'setting2' was added with value: 300\n"
                 + "Property 'setting3' was added with value: 'none'";
         assertEquals(expected, actual);
     }

@@ -13,8 +13,8 @@ public class Representation {
         unionKeySet.addAll(keySet1);
         unionKeySet.addAll(keySet2);
 
-        TreeMap<String, String> keyMap = new TreeMap<>();
-        unionKeySet.forEach(key -> keyMap.compute(key, (k, v) -> {
+        TreeMap<String, String> keyStatusMap = new TreeMap<>();
+        unionKeySet.forEach(key -> keyStatusMap.compute(key, (k, v) -> {
             Object valueFile1;
             Object valueFile2;
             String returned;
@@ -33,6 +33,6 @@ public class Representation {
             }
             return returned;
         }));
-        return keyMap;
+        return keyStatusMap;
     }
 }
