@@ -1,6 +1,5 @@
 package hexlet.code.formatters;
 
-import javax.lang.model.type.PrimitiveType;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -38,7 +37,7 @@ public class Plain {
         if (valueFile1 == null && valueFile2 != null) {
             return String.format("Property '%s' was updated. From %s to %s", key, null, complexCheck(valueFile2));
         } else if (valueFile1 != null && valueFile2 == null) {
-            return String.format("Property '%s' was updated. From %s to %s", key, valueFile1.toString(), null);
+            return String.format("Property '%s' was updated. From %s to %s", key, valueFile1, null);
         } else {
             return "";
         }

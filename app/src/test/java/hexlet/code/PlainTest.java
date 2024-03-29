@@ -41,12 +41,24 @@ public class PlainTest {
         assertEquals(expected, actual);
     }
 
-//    @Test
-//    public void cleanTest2() throws Exception {
-//        String actual = Differ.generate(toJson2, toJson1, "plain");
-//        String expected = "";
-//        assertEquals(expected, actual);
-//    }
+    @Test
+    public void cleanTest2() throws Exception {
+        String actual = Differ.generate(toJson2, toJson1, "plain");
+        String expected = "Property 'chars2' was updated. From false to [complex value]\n"
+            + "Property 'checked' was updated. From true to false\n"
+            + "Property 'default' was updated. From [value1, value2] to null\n"
+            + "Property 'id' was updated. From null to 45\n"
+            + "Property 'key1' was added with value: 'value1'\n"
+            + "Property 'key2' was removed\n"
+            + "Property 'numbers2' was updated. From [complex value] to [complex value]\n"
+            + "Property 'numbers3' was added with value: [complex value]\n"
+            + "Property 'numbers4' was removed\n"
+            + "Property 'obj1' was removed\n"
+            + "Property 'setting1' was updated. From 'Another value' to 'Some value'\n"
+            + "Property 'setting2' was updated. From 300 to 200\n"
+            + "Property 'setting3' was updated. From 'none' to true";
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void emptyTest1() throws Exception {
