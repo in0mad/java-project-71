@@ -3,13 +3,13 @@ package hexlet.code;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class JsonTest {
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class SimpleJsonTest {
     private final String resourceDirectory = Paths.get("src", "test", "resources").toString();
     Path toJson1;
     Path toJson2;
