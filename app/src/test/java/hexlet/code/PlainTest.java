@@ -46,7 +46,7 @@ public class PlainTest {
         String actual = Differ.generate(toJson2, toJson1, "plain");
         String expected = "Property 'chars2' was updated. From false to [complex value]\n"
             + "Property 'checked' was updated. From true to false\n"
-            + "Property 'default' was updated. From [value1, value2] to null\n"
+            + "Property 'default' was updated. From [complex value] to null\n"
             + "Property 'id' was updated. From null to 45\n"
             + "Property 'key1' was added with value: 'value1'\n"
             + "Property 'key2' was removed\n"

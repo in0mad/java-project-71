@@ -34,13 +34,9 @@ public class Plain {
     }
 
     public static String nullHandler(Object valueFile1, Object valueFile2, String key) {
-        if (valueFile1 == null && valueFile2 != null) {
-            return String.format("Property '%s' was updated. From %s to %s", key, null, complexCheck(valueFile2));
-        } else if (valueFile1 != null && valueFile2 == null) {
-            return String.format("Property '%s' was updated. From %s to %s", key, valueFile1, null);
-        } else {
-            return "";
-        }
+        return valueFile1 == null && valueFile2 != null
+                ? String.format("Property '%s' was updated. From %s to %s", key, null, complexCheck(valueFile2))
+                : String.format("Property '%s' was updated. From %s to %s", key, complexCheck(valueFile1), null);
     }
 
     public static String complexCheck(Object obj) {
