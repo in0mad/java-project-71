@@ -1,5 +1,6 @@
 package hexlet.code.formatters;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -44,10 +45,10 @@ public class Plain {
             return "null";
         } else if (obj instanceof String) {
             return String.format("'%s'", obj);
-        } else if (obj instanceof Number || obj instanceof Boolean) {
-            return obj.toString();
-        } else {
+        } else if (obj instanceof Map || obj instanceof List) {
             return "[complex value]";
+        } else {
+            return obj.toString();
         }
     }
 }
