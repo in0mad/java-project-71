@@ -17,8 +17,7 @@ public class Formatter {
         return Stylish.stylish(dataFile1, dataFile2, keyStatus);
     }
 
-    public static String json(Map<String, Object> dataFile1, Map<String, Object> dataFile2,
-                                 Map<String, String> keyStatus) {
-        return Json.json(dataFile1, dataFile2, keyStatus);
+    public static String json(Map<String, String> keyStatus) {
+        return Json.json(keyStatus);
     }
 }

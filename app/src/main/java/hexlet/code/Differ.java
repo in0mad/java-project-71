@@ -15,7 +15,7 @@ public class Differ {
         return switch (format) {
             case "stylish" -> Formatter.stylish(dataFile1, dataFile2, keyInfo);
             case "plain" -> Formatter.plain(dataFile1, dataFile2, keyInfo);
-            case "json" -> Formatter.json(dataFile1, dataFile2, keyInfo);
+            case "json" -> Formatter.json(keyInfo);
             default -> "unsupported format";
         };
     }

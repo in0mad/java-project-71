@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class JsonTest {
+public class ComplexJsonTest {
     private final String resourceDirectory = Paths.get("src", "test", "resources").toString();
     Path toJson1;
     Path toJson2;
