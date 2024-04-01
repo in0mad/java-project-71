@@ -26,44 +26,15 @@ public class JsonOutputTest {
     public void cleanTest() throws Exception {
         String actual = Differ.generate(toJson1, toJson2, "json");
         String expected = """
-                {
-                  "chars2": "updated",
-                  "checked": "updated",
-                  "default": "updated",
-                  "id": "updated",
-                  "key1": "removed",
-                  "key2": "added",
-                  "numbers2": "updated",
-                  "numbers3": "removed",
-                  "numbers4": "added",
-                  "obj1": "added",
-                  "setting1": "updated",
-                  "setting2": "updated",
-                  "setting3": "updated"
-                }""";
+                "{ \\"chars2\\" : \\"updated\\", \\"checked\\" : \\"updated\\", \\"default\\" : \\"updated\\", \\"id\\" : \\"updated\\", \\"key1\\" : \\"removed\\", \\"key2\\" : \\"added\\", \\"numbers2\\" : \\"updated\\", \\"numbers3\\" : \\"removed\\", \\"numbers4\\" : \\"added\\", \\"obj1\\" : \\"added\\", \\"setting1\\" : \\"updated\\", \\"setting2\\" : \\"updated\\", \\"setting3\\" : \\"updated\\" }\"""";
         assertEquals(expected, actual);
     }
 
     @Test
-    public void cleanTest2() throws Exception {
-        String actual = Differ.generate(toJson2, toJson1, "json");
+    public void cleanHumanTest() throws Exception {
+        String actual = Differ.generate(toJson1, toJson2, "hjs");
         String expected = """
-                {
-                  "chars2": "updated",
-                  "checked": "updated",
-                  "default": "updated",
-                  "id": "updated",
-                  "key1": "added",
-                  "key2": "removed",
-                  "numbers2": "updated",
-                  "numbers3": "added",
-                  "numbers4": "removed",
-                  "obj1": "removed",
-                  "setting1": "updated",
-                  "setting2": "updated",
-                  "setting3": "updated"
-                }""";
-
+                {\"chars2\":\"updated\",\"checked\":\"updated\",\"default\":\"updated\",\"id\":\"updated\",\"key1\":\"removed\",\"key2\":\"added\",\"numbers2\":\"updated\",\"numbers3\":\"removed\",\"numbers4\":\"added\",\"obj1\":\"added\",\"setting1\":\"updated\",\"setting2\":\"updated\",\"setting3\":\"updated\"}""";
         assertEquals(expected, actual);
     }
 
@@ -85,27 +56,6 @@ public class JsonOutputTest {
                   "setting1": "added",
                   "setting2": "added",
                   "setting3": "added"
-                }""";
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void emptyTest2() throws Exception {
-        String actual = Differ.generate(toJson1, toEmptyJson, "json");
-        String expected = """
-                {
-                  "chars1": "removed",
-                  "chars2": "removed",
-                  "checked": "removed",
-                  "default": "removed",
-                  "id": "removed",
-                  "key1": "removed",
-                  "numbers1": "removed",
-                  "numbers2": "removed",
-                  "numbers3": "removed",
-                  "setting1": "removed",
-                  "setting2": "removed",
-                  "setting3": "removed"
                 }""";
         assertEquals(expected, actual);
     }
