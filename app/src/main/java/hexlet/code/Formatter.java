@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import hexlet.code.formatters.Json;
 import hexlet.code.formatters.Plain;
 import hexlet.code.formatters.Stylish;
@@ -17,7 +18,11 @@ public class Formatter {
         return Stylish.stylish(dataFile1, dataFile2, keyStatus);
     }
 
-    public static String json(Map<String, String> keyStatus) {
+    public static String json(Map<String, String> keyStatus) throws Exception {
         return Json.json(keyStatus);
+    }
+
+    public static String humanJson(Map<String, String> keyStatus) throws Exception {
+        return Json.humanJson(keyStatus);
     }
 }
