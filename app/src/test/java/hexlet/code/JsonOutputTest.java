@@ -14,6 +14,7 @@ public class JsonOutputTest {
     Path toJson1;
     Path toJson2;
     Path toEmptyJson;
+
     @BeforeEach
     public void beforeEach() {
         assertTrue(resourceDirectory.endsWith("src/test/resources"));
@@ -42,21 +43,7 @@ public class JsonOutputTest {
     public void emptyTest1() throws Exception {
         String actual = Differ.generate(toEmptyJson, toJson2, "json");
         String expected = """
-                {
-                  "chars1": "added",
-                  "chars2": "added",
-                  "checked": "added",
-                  "default": "added",
-                  "id": "added",
-                  "key2": "added",
-                  "numbers1": "added",
-                  "numbers2": "added",
-                  "numbers4": "added",
-                  "obj1": "added",
-                  "setting1": "added",
-                  "setting2": "added",
-                  "setting3": "added"
-                }""";
+                "{ \\"chars1\\" : \\"added\\", \\"chars2\\" : \\"added\\", \\"checked\\" : \\"added\\", \\"default\\" : \\"added\\", \\"id\\" : \\"added\\", \\"key2\\" : \\"added\\", \\"numbers1\\" : \\"added\\", \\"numbers2\\" : \\"added\\", \\"numbers4\\" : \\"added\\", \\"obj1\\" : \\"added\\", \\"setting1\\" : \\"added\\", \\"setting2\\" : \\"added\\", \\"setting3\\" : \\"added\\" }\"""";
         assertEquals(expected, actual);
     }
 
