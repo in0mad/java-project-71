@@ -11,39 +11,36 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class JsonOutputTest {
     private final String resourceDirectory = Paths.get("src", "test", "resources").toString();
-    Path toJson1;
-    Path toJson2;
-    Path toEmptyJson;
+    String toJson1;
+    String toJson2;
+    String toEmptyJson;
 
     @BeforeEach
     public void beforeEach() {
         assertTrue(resourceDirectory.endsWith("src/test/resources"));
-        toJson1 = Paths.get(resourceDirectory, "json1.json").toAbsolutePath();
-        toJson2 = Paths.get(resourceDirectory, "json2.json").toAbsolutePath();
-        toEmptyJson = Paths.get(resourceDirectory, "json-empty.json").toAbsolutePath();
+        toJson1 = Paths.get(resourceDirectory, "json1.json").toString();
+        toJson2 = Paths.get(resourceDirectory, "json2.json").toString();
+        toEmptyJson = Paths.get(resourceDirectory, "json-empty.json").toString();
     }
 
     @Test
     public void cleanTest() throws Exception {
         String actual = Differ.generate(toJson1, toJson2, "json");
-        String expected = """
-                "{ \\"chars2\\" : \\"updated\\", \\"checked\\" : \\"updated\\", \\"default\\" : \\"updated\\", \\"id\\" : \\"updated\\", \\"key1\\" : \\"removed\\", \\"key2\\" : \\"added\\", \\"numbers2\\" : \\"updated\\", \\"numbers3\\" : \\"removed\\", \\"numbers4\\" : \\"added\\", \\"obj1\\" : \\"added\\", \\"setting1\\" : \\"updated\\", \\"setting2\\" : \\"updated\\", \\"setting3\\" : \\"updated\\" }\"""";
+        String expected = "result-json-clean";
         assertEquals(expected, actual);
     }
 
     @Test
     public void cleanHumanTest() throws Exception {
         String actual = Differ.generate(toJson1, toJson2, "hjs");
-        String expected = """
-                {\"chars2\":\"updated\",\"checked\":\"updated\",\"default\":\"updated\",\"id\":\"updated\",\"key1\":\"removed\",\"key2\":\"added\",\"numbers2\":\"updated\",\"numbers3\":\"removed\",\"numbers4\":\"added\",\"obj1\":\"added\",\"setting1\":\"updated\",\"setting2\":\"updated\",\"setting3\":\"updated\"}""";
+        String expected = "result-json-human";
         assertEquals(expected, actual);
     }
 
     @Test
     public void emptyTest1() throws Exception {
         String actual = Differ.generate(toEmptyJson, toJson2, "json");
-        String expected = """
-                "{ \\"chars1\\" : \\"added\\", \\"chars2\\" : \\"added\\", \\"checked\\" : \\"added\\", \\"default\\" : \\"added\\", \\"id\\" : \\"added\\", \\"key2\\" : \\"added\\", \\"numbers1\\" : \\"added\\", \\"numbers2\\" : \\"added\\", \\"numbers4\\" : \\"added\\", \\"obj1\\" : \\"added\\", \\"setting1\\" : \\"added\\", \\"setting2\\" : \\"added\\", \\"setting3\\" : \\"added\\" }\"""";
+        String expected = "result-json.empty";
         assertEquals(expected, actual);
     }
 

@@ -11,15 +11,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ComplexJsonTest {
     private final String resourceDirectory = Paths.get("src", "test", "resources").toString();
-    Path toJson1;
-    Path toJson2;
-    Path toEmptyJson;
+    String toJson1;
+    String toJson2;
+    String toEmptyJson;
     @BeforeEach
     public void beforeEach() {
         assertTrue(resourceDirectory.endsWith("src/test/resources"));
-        toJson1 = Paths.get(resourceDirectory, "json1.json").toAbsolutePath();
-        toJson2 = Paths.get(resourceDirectory, "json2.json").toAbsolutePath();
-        toEmptyJson = Paths.get(resourceDirectory, "json-empty.json").toAbsolutePath();
+        toJson1 = Paths.get(resourceDirectory, "json1.json").toString();
+        toJson2 = Paths.get(resourceDirectory, "json2.json").toString();
+        toEmptyJson = Paths.get(resourceDirectory, "json-empty.json").toString();
     }
 
     @Test

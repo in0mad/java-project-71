@@ -1,0 +1,1 @@
+"{ \\"chars1\\" : \\"added\\", \\"chars2\\" : \\"added\\", \\"checked\\" : \\"added\\", \\"default\\" : \\"added\\", \\"id\\" : \\"added\\", \\"key2\\" : \\"added\\", \\"numbers1\\" : \\"added\\", \\"numbers2\\" : \\"added\\", \\"numbers4\\" : \\"added\\", \\"obj1\\" : \\"added\\", \\"setting1\\" : \\"added\\", \\"setting2\\" : \\"added\\", \\"setting3\\" : \\"added\\" }\"

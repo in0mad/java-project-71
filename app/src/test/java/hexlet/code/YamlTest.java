@@ -11,15 +11,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class YamlTest {
     private final String resourceDirectory = Paths.get("src", "test", "resources").toString();
-    Path toYaml1;
-    Path toYaml2;
-    Path toEmptyYaml;
+    String toYaml1;
+    String toYaml2;
+    String toEmptyYaml;
     @BeforeEach
     public void beforeEach() {
         assertTrue(resourceDirectory.endsWith("src/test/resources"));
-        toYaml1 = Paths.get(resourceDirectory, "yaml1.yml").toAbsolutePath();
-        toYaml2 = Paths.get(resourceDirectory, "yaml2.yml").toAbsolutePath();
-        toEmptyYaml = Paths.get(resourceDirectory, "yaml-empty.yml").toAbsolutePath();
+        toYaml1 = Paths.get(resourceDirectory, "yaml1.yml").toString();
+        toYaml2 = Paths.get(resourceDirectory, "yaml2.yml").toString();
+        toEmptyYaml = Paths.get(resourceDirectory, "yaml-empty.yml").toString();
     }
 
     @Test
