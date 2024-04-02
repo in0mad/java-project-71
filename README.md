@@ -43,9 +43,9 @@ make report
 make test
 ```
 
-### Demo of comparinig two *json* files
+### Demo of the App
  
-[![asciicast](https://asciinema.org/a/d7a2M7FgKVHPM4WRpyVHu6Hwt.svg)](https://asciinema.org/a/d7a2M7FgKVHPM4WRpyVHu6Hwt)
+[![asciicast](https://asciinema.org/a/Mj09E48iDkEAy7cYWHAPwR5E7.svg)](https://asciinema.org/a/Mj09E48iDkEAy7cYWHAPwR5E7)
 
 ## The Multiple Runtime Version Manager *asdf*
 
