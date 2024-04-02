@@ -3,7 +3,7 @@ package hexlet.code;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Path;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,21 +26,24 @@ public class JsonOutputTest {
     @Test
     public void cleanTest() throws Exception {
         String actual = Differ.generate(toJson1, toJson2, "json");
-        String expected = "result-json-clean";
+        String pathForCleanTest = Paths.get(resourceDirectory, "result-json-clean.txt").toString();
+        String expected = Files.readString(Paths.get(pathForCleanTest));
         assertEquals(expected, actual);
     }
 
     @Test
     public void cleanHumanTest() throws Exception {
         String actual = Differ.generate(toJson1, toJson2, "hjs");
-        String expected = "result-json-human";
+        String pathForHumanTest = Paths.get(resourceDirectory, "result-json-human.txt").toString();
+        String expected = Files.readString(Paths.get(pathForHumanTest));
         assertEquals(expected, actual);
     }
 
     @Test
     public void emptyTest1() throws Exception {
         String actual = Differ.generate(toEmptyJson, toJson2, "json");
-        String expected = "result-json.empty";
+        String pathForEmptyTest = Paths.get(resourceDirectory, "result-json-empty.txt").toString();
+        String expected = Files.readString(Paths.get(pathForEmptyTest));
         assertEquals(expected, actual);
     }
 
