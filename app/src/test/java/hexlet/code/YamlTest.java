@@ -9,11 +9,11 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class YamlTest {
+public final class YamlTest {
     private final String resourceDirectory = Paths.get("src", "test", "resources").toString();
-    String toYaml1;
-    String toYaml2;
-    String toEmptyYaml;
+    private String toYaml1;
+    private String toYaml2;
+    private String toEmptyYaml;
     @BeforeEach
     public void beforeEach() {
         assertTrue(resourceDirectory.endsWith("src/test/resources"));

@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Paths;
 
-public class SimpleJsonTest {
+public final class SimpleJsonTest {
     private final String resourceDirectory = Paths.get("src", "test", "resources").toString();
-    String toJson1;
-    String toJson2;
-    String toEmptyJson;
+    private String toJson1;
+    private String toJson2;
+    private String toEmptyJson;
     @BeforeEach
     public void beforeEach() {
         assertTrue(resourceDirectory.endsWith("src/test/resources"));
