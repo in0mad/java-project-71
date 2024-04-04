@@ -27,7 +27,7 @@ public class Json {
         return objectMapper.writeValueAsString(result);
     }
 
-    public static String humanJson(Map<String, String> keyStatus) throws Exception {
+    public static String defaultJson(Map<String, String> keyStatus) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, String> clearedMap = new TreeMap<>(keyStatus.entrySet().stream()
                 .filter(entry -> !entry.getValue().equals("unchanged"))

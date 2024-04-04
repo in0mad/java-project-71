@@ -21,7 +21,7 @@ public class Formatter {
         return Json.json(keyStatus);
     }
 
-    public static String humanJson(Map<String, String> keyStatus) throws Exception {
-        return Json.humanJson(keyStatus);
+    public static String defaultJson(Map<String, String> keyStatus) throws Exception {
+        return Json.defaultJson(keyStatus);
     }
 }

@@ -19,7 +19,7 @@ public class Differ {
             case "stylish" -> Formatter.stylish(dataFile1, dataFile2, keyInfo);
             case "plain" -> Formatter.plain(dataFile1, dataFile2, keyInfo);
             case "json" -> Formatter.json(keyInfo);
-            case "hjs" -> Formatter.humanJson(keyInfo);
+            case "default" -> Formatter.defaultJson(keyInfo);
             default -> "unsupported format";
         };
     }
