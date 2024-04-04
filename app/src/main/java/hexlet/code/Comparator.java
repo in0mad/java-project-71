@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-public class Representation {
+public class Comparator {
     public static Map<String, String> collectKeyStatus(Map<String, Object> dataFile1, Map<String, Object> dataFile2) {
         Set<String> unionKeySet = new TreeSet<>(dataFile1.keySet());
         unionKeySet.addAll(dataFile2.keySet());
