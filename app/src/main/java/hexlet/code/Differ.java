@@ -33,4 +33,8 @@ public class Differ {
             return "unknown";
         }
     }
+
+    public static String generate(String filepath1, String filepath2) throws Exception {
+        return generate(filepath1, filepath2, "default");
+    }
 }
