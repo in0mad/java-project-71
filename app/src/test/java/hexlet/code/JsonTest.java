@@ -46,7 +46,7 @@ public final class JsonTest {
     @Test
     public void defaultTest() throws Exception {
         String actual = Differ.generate(toJson1, toJson2, "default");
-        String pathDefaultTest = Paths.get(resourceDirectory, "result-default.txt").toString();
+        String pathDefaultTest = Paths.get(resourceDirectory, "result-stylish.txt").toString();
         String expected = Files.readString(Paths.get(pathDefaultTest));
         assertEquals(expected, actual);
     }
@@ -54,7 +54,7 @@ public final class JsonTest {
     @Test
     public void defaultTest2() throws Exception {
         String actual = Differ.generate(toJson1, toJson2);
-        String pathDefaultTest = Paths.get(resourceDirectory, "result-default.txt").toString();
+        String pathDefaultTest = Paths.get(resourceDirectory, "result-stylish.txt").toString();
         String expected = Files.readString(Paths.get(pathDefaultTest));
         assertEquals(expected, actual);
     }

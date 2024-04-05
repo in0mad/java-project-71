@@ -13,7 +13,8 @@ public class Formatter {
             case "stylish" -> stylish(dataFile1, dataFile2, keyInfo);
             case "plain" -> plain(dataFile1, dataFile2, keyInfo);
             case "json" -> json(keyInfo);
-            case "default" -> defaultJson(keyInfo);
+            case "default" -> defaultJson(dataFile1, dataFile2, keyInfo);
+            case "human-json" -> humanJson(keyInfo);
             default -> "unsupported format";
         };
     }
@@ -31,7 +32,12 @@ public class Formatter {
         return Json.json(keyStatus);
     }
 
-    public static String defaultJson(Map<String, String> keyStatus) throws Exception {
-        return Json.defaultJson(keyStatus);
+    public static String defaultJson(Map<String, Object> dataFile1, Map<String, Object> dataFile2,
+                                     Map<String, String> keyStatus) {
+        return stylish(dataFile1, dataFile2, keyStatus);
+    }
+
+    public static String humanJson(Map<String, String> keyStatus) throws Exception {
+        return Json.humanJson(keyStatus);
     }
 }
