@@ -50,4 +50,12 @@ public final class YamlTest {
         String expected = Files.readString(Paths.get(pathDefaultTest));
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void defaultTest2() throws Exception {
+        String actual = Differ.generate(toYaml1, toYaml2);
+        String pathDefaultTest = Paths.get(resourceDirectory, "result-default.txt").toString();
+        String expected = Files.readString(Paths.get(pathDefaultTest));
+        assertEquals(expected, actual);
+    }
 }
