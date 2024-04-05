@@ -6,19 +6,17 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.util.Map;
 
-import java.nio.file.Path;
 
 public class Parser {
-    public static Map<String, Object> parse(Path filepath) throws Exception {
-        String path = filepath.toString();
-        ObjectMapper objectMapper;
-        if (path.endsWith(".yaml") || path.endsWith(".yml")) {
-            objectMapper = new ObjectMapper(new YAMLFactory());
-        } else {
-            objectMapper = new ObjectMapper();
-        }
+    public static Map<String, Object> parse(String fileData, String extension) throws Exception {
+        ObjectMapper objectMapper = switch (extension) {
+            case "json" -> new ObjectMapper();
+            case "yaml" -> new ObjectMapper(new YAMLFactory());
+            default -> throw new Exception("unknown format of the file");
+        };
+
         return objectMapper.
-                readValue(filepath.toFile(), new TypeReference<>() {
+                readValue(fileData, new TypeReference<>() {
                 });
     }
 }
