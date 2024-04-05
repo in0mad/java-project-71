@@ -59,4 +59,11 @@ public final class JsonTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void humanJsonTest() throws Exception {
+        String actual = Differ.generate(toJson1, toJson2, "human-json");
+        String pathDefaultTest = Paths.get(resourceDirectory, "result-json-human.txt").toString();
+        String expected = Files.readString(Paths.get(pathDefaultTest));
+        assertEquals(expected, actual);
+    }
 }
