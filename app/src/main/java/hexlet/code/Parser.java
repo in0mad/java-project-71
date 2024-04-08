@@ -12,7 +12,7 @@ public class Parser {
         ObjectMapper objectMapper = switch (extension) {
             case "json" -> new ObjectMapper();
             case "yaml" -> new ObjectMapper(new YAMLFactory());
-            default -> throw new Exception("unknown format of the file");
+            default -> throw new RuntimeException("unknown format of the file");
         };
 
         return objectMapper.

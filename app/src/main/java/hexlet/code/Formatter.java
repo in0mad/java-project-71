@@ -14,8 +14,7 @@ public class Formatter {
             case "plain" -> plain(dataFile1, dataFile2, keyInfo);
             case "json" -> json(keyInfo);
             case "default" -> defaultJson(dataFile1, dataFile2, keyInfo);
-            case "human-json" -> humanJson(keyInfo);
-            default -> "unsupported format";
+            default -> throw new RuntimeException("unsupported format");
         };
     }
     public static String plain(Map<String, Object> dataFile1, Map<String, Object> dataFile2,
@@ -37,7 +36,4 @@ public class Formatter {
         return stylish(dataFile1, dataFile2, keyStatus);
     }
 
-    public static String humanJson(Map<String, String> keyStatus) throws Exception {
-        return Json.humanJson(keyStatus);
-    }
 }

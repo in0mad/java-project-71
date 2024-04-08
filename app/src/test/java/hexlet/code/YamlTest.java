@@ -58,12 +58,4 @@ public final class YamlTest {
         String expected = Files.readString(Paths.get(pathDefaultTest));
         assertEquals(expected, actual);
     }
-
-    @Test
-    public void humanJsonTest() throws Exception {
-        String actual = Differ.generate(toYaml1, toYaml2, "human-json");
-        String pathDefaultTest = Paths.get(resourceDirectory, "result-json-human.txt").toString();
-        String expected = Files.readString(Paths.get(pathDefaultTest));
-        assertEquals(expected, actual);
-    }
 }

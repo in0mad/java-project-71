@@ -1,7 +1,6 @@
 package hexlet.code.formatters;
 
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,14 +24,5 @@ public class Json {
                 })
                 .collect(Collectors.joining(", ", "{ ", " }"));
         return objectMapper.writeValueAsString(result);
-    }
-
-    public static String humanJson(Map<String, String> keyStatus) throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, String> clearedMap = new TreeMap<>(keyStatus.entrySet().stream()
-                .filter(entry -> !entry.getValue().equals("unchanged"))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
-
-        return objectMapper.writeValueAsString(clearedMap);
     }
 }
