@@ -20,7 +20,6 @@ public final class JsonTest {
     private String plainResult;
     private String jsonResult;
     private String defaultResult;
-    private String extention;
 
 
     @BeforeEach
@@ -34,13 +33,21 @@ public final class JsonTest {
         defaultResult = Files.readString(Paths.get(resourceDirectory, "result-default.txt"));
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"json", "yaml"})
-    public void stylishTest(String extention) throws Exception {
+//    @ParameterizedTest
+//    @ValueSource(strings = {"json", "yaml"})
+//    public void stylishTest(String extention) throws Exception {
+//        String actual = Differ.generate(toJson1, toJson2, "stylish");
+//        String expected = stylishResult;
+//        assertEquals(expected, actual);
+//    }
+
+    @Test
+    public void stylishTest() throws Exception {
         String actual = Differ.generate(toJson1, toJson2, "stylish");
         String expected = stylishResult;
         assertEquals(expected, actual);
     }
+
     @Test
     public void plainTest() throws Exception {
         String actual = Differ.generate(toJson1, toJson2, "plain");
