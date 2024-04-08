@@ -17,6 +17,16 @@ public class Formatter {
             default -> throw new RuntimeException("unsupported format");
         };
     }
+
+//    public static String format(Map<String, Map<String, Object>> keyInfo, String format) throws Exception {
+//        return switch (format) {
+//            case "stylish" -> stylish(dataFile1, dataFile2, keyInfo);
+//            case "plain" -> plain(dataFile1, dataFile2, keyInfo);
+//            case "json" -> json(keyInfo);
+//            case "default" -> defaultJson(dataFile1, dataFile2, keyInfo);
+//            default -> throw new RuntimeException("unsupported format");
+//        };
+//    }
     public static String plain(Map<String, Object> dataFile1, Map<String, Object> dataFile2,
                                Map<String, String> keyStatus) {
         return Plain.plain(dataFile1, dataFile2, keyStatus);

@@ -15,10 +15,11 @@ public class Differ {
         Map<String, Object> parseFile1 = Parser.parse(dataFile1, defineFormat(absolutePath1));
         Map<String, Object> parseFile2 = Parser.parse(dataFile2, defineFormat(absolutePath2));
 
-        //Map<String, String> keyInfo = Comparator.collectKeyStatus(parseFile1, parseFile2);
-        Map<String, Map<String, Object>> keyInfo = Comparator.collectKeyStatus(parseFile1, parseFile2);
-
+        Map<String, String> keyInfo = Comparator.collectKeyStatus(parseFile1, parseFile2);
         return Formatter.format(parseFile1, parseFile2, keyInfo, format);
+
+//        Map<String, Map<String, Object>> keyInfo = Comparator.collectKeyStatus(parseFile1, parseFile2);
+//        return Formatter.format(keyInfo, format);
     }
 
     public static String readFile(String filepath) throws Exception {
