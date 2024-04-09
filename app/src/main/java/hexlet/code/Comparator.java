@@ -7,32 +7,29 @@ public class Comparator {
         Set<String> unionKeySet = new TreeSet<>(dataFile1.keySet());
         unionKeySet.addAll(dataFile2.keySet());
 
-        TreeMap <String, Map<String, Object>> keyStatusMap = new TreeMap<>();
+        Map <String, Map<String, Object>> keyStatusMap = new TreeMap<>();
 
         unionKeySet.forEach(key -> keyStatusMap.compute(key, (k, v) -> {
             LinkedList<String> statuses = new LinkedList<>(List.of("Current value", "Key status", "Old value", "New value"));
+            Map<String, Object> temp = new HashMap<>();
             for (String status : statuses) {
-                return switch (status) {
-                    case "Key status" -> takeKeyStatus(key, dataFile1, dataFile2);
-                    case "Old value" -> takeOldVal(key, dataFile1, dataFile2);
-                    case "New value" -> takeNewVal(key, dataFile2);
-                    default -> takeCurrent(key, dataFile1, dataFile2);
-                };
+                switch (status) {
+                    case "Key status" -> temp.put("Key status", takeKeyStatus(key, dataFile1, dataFile2));
+                    case "Old value" -> temp.put("Old value", takeOldVal(key, dataFile1, dataFile2));
+                    case "New value" -> temp.put("New value", takeNewVal(key, dataFile2));
+                    default -> temp.put("Current value", takeCurrent(key, dataFile1, dataFile2));
+                }
             }
-            return v;
+            return temp;
         }));
-
         return keyStatusMap;
     }
 
-    public static Map<String, Object> takeCurrent(String key, Map<String, Object> dataFile1, Map<String, Object> dataFile2) {
-        Map<String, Object> currentValMap = new HashMap<>();
-        currentValMap.put("Current value", dataFile1.getOrDefault(key, dataFile2.get(key)));
-        return currentValMap;
+    public static Object takeCurrent(String key, Map<String, Object> dataFile1, Map<String, Object> dataFile2) {
+        return dataFile1.getOrDefault(key, dataFile2.get(key));
     }
 
-    public static Map<String, Object> takeKeyStatus(String key, Map<String, Object> dataFile1, Map<String, Object> dataFile2) {
-        Map<String, Object> statusMap = new HashMap<>();
+    public static Object takeKeyStatus(String key, Map<String, Object> dataFile1, Map<String, Object> dataFile2) {
         Object valueFile1;
         Object valueFile2;
         Object returned;
@@ -45,19 +42,14 @@ public class Comparator {
                 : valueFile1.equals(valueFile2) ? "unchanged" : "updated";
         }
 
-        statusMap.put("Key status", returned);
-        return statusMap;
+        return returned;
     }
 
-    public static Map<String, Object> takeOldVal(String key, Map<String, Object> dataFile1, Map<String, Object> dataFile2) {
-        Map<String, Object> oldValMap = new HashMap<>();
-        oldValMap.put("Old value", dataFile1.getOrDefault(key, dataFile2.get(key)));
-        return oldValMap;
+    public static Object takeOldVal(String key, Map<String, Object> dataFile1, Map<String, Object> dataFile2) {
+        return dataFile1.getOrDefault(key, dataFile2.get(key));
     }
 
-    public static Map<String, Object> takeNewVal(String key, Map<String, Object> dataFile2) {
-        Map<String, Object> newValMap = new HashMap<>();
-        newValMap.put("New value", dataFile2.getOrDefault(key, ""));
-        return newValMap;
+    public static Object takeNewVal(String key, Map<String, Object> dataFile2) {
+        return dataFile2.getOrDefault(key, "");
     }
 }
