@@ -25,7 +25,7 @@ public class Comparator {
                     case "Key value" -> temp.put("Key value", keyVal(key, dataFile1, dataFile2));
                     case "Key status" -> temp.put("Key status", takeKeyStatus(key, dataFile1, dataFile2));
                     case "Old value" -> temp.put("Old value", takeOldVal(key, dataFile1, dataFile2));
-                    case "New value" -> temp.put("New value", takeNewVal(key, dataFile2));
+                    default -> temp.put("New value", takeNewVal(key, dataFile2));
                 }
             }
             return temp;
