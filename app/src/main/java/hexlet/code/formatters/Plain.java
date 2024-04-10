@@ -5,39 +5,43 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Plain {
-    public static String plain(Map<String, Object> dataFile1, Map<String, Object> dataFile2,
-                                 Map<String, String> keyStatus) {
-        return keyStatus.keySet().stream()
-                .filter(key -> !keyStatus.get(key).equals("unchanged"))
-                .map(key -> {
-                    Object valueFile1;
-                    Object valueFile2;
+    public static String plain(Map<String, Map<String, Object>> keyStatus) {
+        return keyStatus.entrySet().stream()
+                .filter(entry -> {
+                    Map<String, Object> temp = entry.getValue();
+                    return !temp.get("Key status").equals("unchanged");
+                })
+                .map(entry -> {
+                    String key = entry.getKey();
+                    Map<String, Object> temp = entry.getValue();
+                    Object valueFileOld;
+                    Object valueFileNew;
                     String returned;
-                    if (keyStatus.get(key).equals("updated")) {
-                        valueFile1 = dataFile1.get(key);
-                        valueFile2 = dataFile2.get(key);
-                        if (valueFile1 == null || valueFile2 == null) {
-                            returned = nullHandler(valueFile1, valueFile2, key);
+                    if (temp.get("Key status").equals("updated")) {
+                        valueFileOld = temp.get("Old value");
+                        valueFileNew = temp.get("New value");
+                        if (valueFileOld == null || valueFileNew == null) {
+                            returned = nullHandler(valueFileOld, valueFileNew, key);
                         } else {
                             returned = String.format("Property '%s' was updated. From %s to %s", key,
-                                    complexCheck(valueFile1), complexCheck(valueFile2));
+                                    complexCheck(valueFileOld), complexCheck(valueFileNew));
                         }
-                    } else if (keyStatus.get(key).equals("removed")) {
+                    } else if (temp.get("Key status").equals("removed")) {
                         returned = String.format("Property '%s' was removed", key);
                     } else {
-                        valueFile2 = dataFile2.get(key);
+                        valueFileNew = temp.get("New value");
                         returned = String.format("Property '%s' was added with value: %s",
-                                key, complexCheck(valueFile2));
+                                key, complexCheck(valueFileNew));
                     }
                     return returned;
                 })
                 .collect(Collectors.joining("\n"));
     }
 
-    public static String nullHandler(Object valueFile1, Object valueFile2, String key) {
-        return valueFile1 == null && valueFile2 != null
-                ? String.format("Property '%s' was updated. From %s to %s", key, null, complexCheck(valueFile2))
-                : String.format("Property '%s' was updated. From %s to %s", key, complexCheck(valueFile1), null);
+    public static String nullHandler(Object valueFileOld, Object valueFileNew, String key) {
+        return valueFileOld == null && valueFileNew != null
+                ? String.format("Property '%s' was updated. From %s to %s", key, null, complexCheck(valueFileNew))
+                : String.format("Property '%s' was updated. From %s to %s", key, complexCheck(valueFileOld), null);
     }
 
     public static String complexCheck(Object obj) {
