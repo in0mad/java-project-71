@@ -45,7 +45,7 @@ make test
 
 ### Demo of the App
  
-[![asciicast](https://asciinema.org/a/Mj09E48iDkEAy7cYWHAPwR5E7.svg)](https://asciinema.org/a/Mj09E48iDkEAy7cYWHAPwR5E7)
+[![asciicast](https://asciinema.org/a/QbK4SMMJNqzBtjyGSLiFGZCvq.svg)](https://asciinema.org/a/QbK4SMMJNqzBtjyGSLiFGZCvq)
 
 ## The Multiple Runtime Version Manager *asdf*
 
