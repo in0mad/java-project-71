@@ -1,7 +1,7 @@
 package hexlet.code;
 
 import java.util.Map;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
@@ -14,18 +14,18 @@ public class Comparator {
         Set<String> unionKeySet = new TreeSet<>(dataFile1.keySet());
         unionKeySet.addAll(dataFile2.keySet());
 
-        Map<String, Map<String, Object>> keyStatusMap = new TreeMap<>();
+        TreeMap<String, Map<String, Object>> keyStatusMap = new TreeMap<>();
 
         unionKeySet.forEach(key -> keyStatusMap.compute(key, (k, v) -> {
             LinkedList<String> statuses = new LinkedList<>(
-                    List.of("Current value", "Key status", "Old value", "New value"));
-            Map<String, Object> temp = new HashMap<>();
+                    List.of("Key value", "Key status", "Old value", "New value"));
+            Map<String, Object> temp = new LinkedHashMap<>();
             for (String status : statuses) {
                 switch (status) {
+                    case "Key value" -> temp.put("Key value", keyVal(key, dataFile1, dataFile2));
                     case "Key status" -> temp.put("Key status", takeKeyStatus(key, dataFile1, dataFile2));
                     case "Old value" -> temp.put("Old value", takeOldVal(key, dataFile1, dataFile2));
                     case "New value" -> temp.put("New value", takeNewVal(key, dataFile2));
-                    default -> temp.put("Current value", takeCurrent(key, dataFile1, dataFile2));
                 }
             }
             return temp;
@@ -33,7 +33,7 @@ public class Comparator {
         return keyStatusMap;
     }
 
-    public static Object takeCurrent(String key, Map<String, Object> dataFile1, Map<String, Object> dataFile2) {
+    public static Object keyVal(String key, Map<String, Object> dataFile1, Map<String, Object> dataFile2) {
         return dataFile1.getOrDefault(key, dataFile2.get(key));
     }
 
