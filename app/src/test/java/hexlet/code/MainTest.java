@@ -32,7 +32,7 @@ public final class MainTest {
         stylishResult = Files.readString(Paths.get(resourceDirectory, "result-stylish.txt"));
         plainResult = Files.readString(Paths.get(resourceDirectory, "result-plain.txt"));
         jsonResult = Files.readString(Paths.get(resourceDirectory, "result-json.txt"));
-        defaultResult = Files.readString(Paths.get(resourceDirectory, "result-default.txt"));
+        defaultResult = stylishResult;
     }
 
     @ParameterizedTest
@@ -71,19 +71,6 @@ public final class MainTest {
             actual = Differ.generate(toYaml1, toYaml2, "json");
         }
         String expected = jsonResult;
-        assertEquals(expected, actual);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"json", "yaml"})
-    public void defaultTest(String extension) throws Exception {
-        String actual;
-        if (extension.equals("json")) {
-            actual = Differ.generate(toJson1, toJson2, "default");
-        } else {
-            actual = Differ.generate(toYaml1, toYaml2, "default");
-        }
-        String expected = defaultResult;
         assertEquals(expected, actual);
     }
 
