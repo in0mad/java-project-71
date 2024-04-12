@@ -12,23 +12,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class MainTest {
     private final String resourceDirectory = Paths.get("src", "test", "resources").toString();
-    private String toJson1;
-    private String toJson2;
-    private String toYaml1;
-    private String toYaml2;
+    private final String fileTemplate1 = Paths.get("src", "test", "resources", "input1").toString();
+    private final String fileTemplate2 = Paths.get("src", "test", "resources", "input2").toString();
     private String stylishResult;
     private String plainResult;
     private String jsonResult;
     private String defaultResult;
 
 
+
     @BeforeEach
     public void beforeEach() throws Exception {
         assertTrue(resourceDirectory.endsWith("src/test/resources"));
-        toJson1 = Paths.get(resourceDirectory, "json1.json").toString();
-        toJson2 = Paths.get(resourceDirectory, "json2.json").toString();
-        toYaml1 = Paths.get(resourceDirectory, "yaml1.yml").toString();
-        toYaml2 = Paths.get(resourceDirectory, "yaml2.yml").toString();
         stylishResult = Files.readString(Paths.get(resourceDirectory, "result-stylish.txt"));
         plainResult = Files.readString(Paths.get(resourceDirectory, "result-plain.txt"));
         jsonResult = Files.readString(Paths.get(resourceDirectory, "result-json.txt"));
@@ -36,53 +31,37 @@ public final class MainTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"json", "yaml"})
+    @ValueSource(strings = {".json", ".yml"})
     public void stylishTest(String extension) throws Exception {
-        String actual;
-        if (extension.equals("json")) {
-            actual = Differ.generate(toJson1, toJson2, "stylish");
-        } else {
-            actual = Differ.generate(toYaml1, toYaml2, "stylish");
-        }
+        String actual = Differ.generate(fileTemplate1 + extension,
+                fileTemplate2 + extension, "stylish");
         String expected = stylishResult;
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"json", "yaml"})
+    @ValueSource(strings = {".json", ".yml"})
     public void plainTest(String extension) throws Exception {
-        String actual;
-        if (extension.equals("json")) {
-            actual = Differ.generate(toJson1, toJson2, "plain");
-        } else {
-            actual = Differ.generate(toYaml1, toYaml2, "plain");
-        }
+        String actual = Differ.generate(fileTemplate1 + extension,
+                fileTemplate2 + extension, "plain");
         String expected = plainResult;
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"json", "yaml"})
+    @ValueSource(strings = {".json", ".yml"})
     public void jsonTest(String extension) throws Exception {
-        String actual;
-        if (extension.equals("json")) {
-            actual = Differ.generate(toJson1, toJson2, "json");
-        } else {
-            actual = Differ.generate(toYaml1, toYaml2, "json");
-        }
+        String actual = Differ.generate(fileTemplate1 + extension,
+                fileTemplate2 + extension, "json");
         String expected = jsonResult;
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"json", "yaml"})
+    @ValueSource(strings = {".json", ".yml"})
     public void defaultTest2(String extension) throws Exception {
-        String actual;
-        if (extension.equals("json")) {
-            actual = Differ.generate(toJson1, toJson2);
-        } else {
-            actual = Differ.generate(toYaml1, toYaml2);
-        }
+        String actual = Differ.generate(fileTemplate1 + extension,
+                fileTemplate2 + extension);
         String expected = defaultResult;
         assertEquals(expected, actual);
     }
