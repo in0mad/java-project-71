@@ -3,11 +3,12 @@ package hexlet.code;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class Differ {
     public static String generate(String filepath1, String filepath2, String format) throws Exception {
-        String absolutePath1 = Paths.get(filepath1).toAbsolutePath().normalize().toString();
-        String absolutePath2 = Paths.get(filepath2).toAbsolutePath().normalize().toString();
+        String absolutePath1 = normalizePath(filepath1);
+        String absolutePath2 = normalizePath(filepath2);
 
         String dataFile1 = readFile(absolutePath1);
         String dataFile2 = readFile(absolutePath2);
@@ -24,16 +25,15 @@ public class Differ {
     }
 
     public static String defineFormat(String filepath) {
-        if (filepath.endsWith(".yaml") || filepath.endsWith(".yml")) {
-            return  "yaml";
-        } else if (filepath.endsWith(".json")) {
-            return  "json";
-        } else {
-            return "unknown";
-        }
+        String[] splitPath = filepath.split(Pattern.quote("."));
+        return splitPath[splitPath.length - 1];
     }
 
     public static String generate(String filepath1, String filepath2) throws Exception {
         return generate(filepath1, filepath2, "stylish");
+    }
+
+    public static String normalizePath(String filepath) {
+        return Paths.get(filepath).toAbsolutePath().normalize().toString();
     }
 }

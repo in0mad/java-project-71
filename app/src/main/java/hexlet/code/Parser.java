@@ -11,7 +11,7 @@ public class Parser {
     public static Map<String, Object> parse(String fileData, String extension) throws Exception {
         ObjectMapper objectMapper = switch (extension) {
             case "json" -> new ObjectMapper();
-            case "yaml" -> new ObjectMapper(new YAMLFactory());
+            case "yaml", "yml" -> new ObjectMapper(new YAMLFactory());
             default -> throw new RuntimeException("unknown format of the file");
         };
 
