@@ -20,20 +20,16 @@ public class Stylish {
                             returned = nullHandler(valueFileOld, valueFileNew, key);
                         } else {
                             returned = valueFileOld.equals(valueFileNew)
-                                    ? String.format("  %s: %s", key, valueFileOld.toString())
+                                    ? String.format("  %s: %s", key, valueFileOld)
                                     : String.format("- %s: %s\n"
-                                    + "  + %s: %s", key, valueFileOld, key, valueFileNew.toString());
+                                    + "  + %s: %s", key, valueFileOld, key, valueFileNew);
                         }
                     } else if (map.get("KEY STATUS").equals("removed")) {
                         valueFileOld = map.get("OLD VALUE");
-                        returned = valueFileOld == null
-                                ? String.format("- %s: %s", key, null)
-                                : String.format("- %s: %s", key, valueFileOld.toString());
+                        returned = String.format("- %s: %s", key, valueFileOld);
                     } else {
                         valueFileNew = map.get("NEW VALUE");
-                        returned = valueFileNew == null
-                                ? String.format("+ %s: %s", key, null)
-                                : String.format("+ %s: %s", key, valueFileNew.toString());
+                        returned = String.format("+ %s: %s", key, valueFileNew);
                     }
                     return returned;
                 })

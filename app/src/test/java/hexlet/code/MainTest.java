@@ -59,7 +59,7 @@ public final class MainTest {
 
     @ParameterizedTest
     @ValueSource(strings = {".json", ".yml"})
-    public void defaultTest2(String extension) throws Exception {
+    public void defaultTest(String extension) throws Exception {
         String actual = Differ.generate(fileTemplate1 + extension,
                 fileTemplate2 + extension);
         String expected = defaultResult;
