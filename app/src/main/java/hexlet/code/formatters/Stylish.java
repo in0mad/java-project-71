@@ -7,16 +7,15 @@ import java.util.stream.Collectors;
 
 public class Stylish {
     public static String stylish(List<Map<String, Object>> keyStatus) {
-        return keyStatus.entrySet().stream()
-                .map(entry -> {
-                    String key = entry.getKey();
-                    Map<String, Object> temp = entry.getValue();
+        return keyStatus.stream()
+                .map(map -> {
+                    String key = map.get("KEY").toString();
                     Object valueFileOld;
                     Object valueFileNew;
                     String returned;
-                    if (temp.get("Key status").equals("unchanged") || temp.get("Key status").equals("updated")) {
-                        valueFileOld = temp.get("Old value");
-                        valueFileNew = temp.get("New value");
+                    if (map.get("KEY STATUS").equals("unchanged") || map.get("KEY STATUS").equals("updated")) {
+                        valueFileOld = map.get("OLD VALUE");
+                        valueFileNew = map.get("NEW VALUE");
                         if (valueFileOld == null || valueFileNew == null) {
                             returned = nullHandler(valueFileOld, valueFileNew, key);
                         } else {
@@ -25,13 +24,13 @@ public class Stylish {
                                     : String.format("- %s: %s\n"
                                     + "  + %s: %s", key, valueFileOld, key, valueFileNew.toString());
                         }
-                    } else if (temp.get("Key status").equals("removed")) {
-                        valueFileOld = temp.get("Old value");
+                    } else if (map.get("KEY STATUS").equals("removed")) {
+                        valueFileOld = map.get("OLD VALUE");
                         returned = valueFileOld == null
                                 ? String.format("- %s: %s", key, null)
                                 : String.format("- %s: %s", key, valueFileOld.toString());
                     } else {
-                        valueFileNew = temp.get("New value");
+                        valueFileNew = map.get("NEW VALUE");
                         returned = valueFileNew == null
                                 ? String.format("+ %s: %s", key, null)
                                 : String.format("+ %s: %s", key, valueFileNew.toString());

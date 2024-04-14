@@ -6,30 +6,26 @@ import java.util.stream.Collectors;
 
 public class Plain {
     public static String plain(List<Map<String, Object>> keyStatus) {
-        return keyStatus.entrySet().stream()
-                .filter(entry -> {
-                    Map<String, Object> temp = entry.getValue();
-                    return !temp.get("Key status").equals("unchanged");
-                })
-                .map(entry -> {
-                    String key = entry.getKey();
-                    Map<String, Object> temp = entry.getValue();
+        return keyStatus.stream()
+                .filter(map -> !map.get("KEY STATUS").equals("unchanged"))
+                .map(map -> {
+                    String key = map.get("KEY").toString();
                     Object valueFileOld;
                     Object valueFileNew;
                     String returned;
-                    if (temp.get("Key status").equals("updated")) {
-                        valueFileOld = temp.get("Old value");
-                        valueFileNew = temp.get("New value");
+                    if (map.get("KEY STATUS").equals("updated")) {
+                        valueFileOld = map.get("OLD VALUE");
+                        valueFileNew = map.get("NEW VALUE");
                         if (valueFileOld == null || valueFileNew == null) {
                             returned = nullHandler(valueFileOld, valueFileNew, key);
                         } else {
                             returned = String.format("Property '%s' was updated. From %s to %s", key,
                                     complexCheck(valueFileOld), complexCheck(valueFileNew));
                         }
-                    } else if (temp.get("Key status").equals("removed")) {
+                    } else if (map.get("KEY STATUS").equals("removed")) {
                         returned = String.format("Property '%s' was removed", key);
                     } else {
-                        valueFileNew = temp.get("New value");
+                        valueFileNew = map.get("NEW VALUE");
                         returned = String.format("Property '%s' was added with value: %s",
                                 key, complexCheck(valueFileNew));
                     }
