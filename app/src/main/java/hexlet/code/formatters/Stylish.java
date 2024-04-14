@@ -16,14 +16,7 @@ public class Stylish {
                     if (map.get("KEY STATUS").equals("unchanged") || map.get("KEY STATUS").equals("updated")) {
                         valueFileOld = map.get("OLD VALUE");
                         valueFileNew = map.get("NEW VALUE");
-                        if (valueFileOld == null || valueFileNew == null) {
-                            returned = nullHandler(valueFileOld, valueFileNew, key);
-                        } else {
-                            returned = valueFileOld.equals(valueFileNew)
-                                    ? String.format("  %s: %s", key, valueFileOld)
-                                    : String.format("- %s: %s\n"
-                                    + "  + %s: %s", key, valueFileOld, key, valueFileNew);
-                        }
+                        returned = textHelpMaker(valueFileOld, valueFileNew, key);
                     } else if (map.get("KEY STATUS").equals("removed")) {
                         valueFileOld = map.get("OLD VALUE");
                         returned = String.format("- %s: %s", key, valueFileOld);
@@ -46,5 +39,20 @@ public class Stylish {
         } else {
             return String.format("  %s: %s", key, null);
         }
+    }
+
+    public static String textHelpMaker(Object valueFileOld, Object valueFileNew, String key) {
+        String temp;
+        if (valueFileOld == null || valueFileNew == null) {
+            temp = nullHandler(valueFileOld, valueFileNew, key);
+        } else {
+            if (valueFileOld.equals(valueFileNew)) {
+                temp = String.format("  %s: %s", key, valueFileOld);
+            } else {
+                temp = String.format("- %s: %s\n"
+                        + "  + %s: %s", key, valueFileOld, key, valueFileNew);
+            }
+        }
+        return temp;
     }
 }
