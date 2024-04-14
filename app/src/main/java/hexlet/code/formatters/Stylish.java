@@ -1,11 +1,12 @@
 package hexlet.code.formatters;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 
 public class Stylish {
-    public static String stylish(Map<String, Map<String, Object>> keyStatus) {
+    public static String stylish(List<Map<String, Object>> keyStatus) {
         return keyStatus.entrySet().stream()
                 .map(entry -> {
                     String key = entry.getKey();

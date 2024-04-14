@@ -1,20 +1,14 @@
 package hexlet.code;
 
-import java.util.Map;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Comparator {
-    public static Map<String, Map<String, Object>> collectKeyStatus(Map<String, Object> dataFile1,
+    public static List<Map<String, Object>> collectKeyStatus(Map<String, Object> dataFile1,
                                                                     Map<String, Object> dataFile2) {
         Set<String> unionKeySet = new TreeSet<>(dataFile1.keySet());
         unionKeySet.addAll(dataFile2.keySet());
 
-        TreeMap<String, Map<String, Object>> keyStatusMap = new TreeMap<>();
+        List<Map<String, Object>> keyStatusMap = new ArrayList<>();
 
         unionKeySet.forEach(key -> keyStatusMap.compute(key, (k, v) -> {
             LinkedList<String> statuses = new LinkedList<>(

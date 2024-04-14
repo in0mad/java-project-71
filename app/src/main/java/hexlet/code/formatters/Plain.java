@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Plain {
-    public static String plain(Map<String, Map<String, Object>> keyStatus) {
+    public static String plain(List<Map<String, Object>> keyStatus) {
         return keyStatus.entrySet().stream()
                 .filter(entry -> {
                     Map<String, Object> temp = entry.getValue();
