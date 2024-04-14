@@ -45,11 +45,12 @@ public class Comparator {
         if (dataFile1.containsKey(key) && dataFile2.containsKey(key)) {
             valueFile1 = dataFile1.get(key);
             valueFile2 = dataFile2.get(key);
-            returned = valueFile1 == null || valueFile2 == null
-                    ? valueFile1 == valueFile2 ? "unchanged" : "updated"
-                    : valueFile1.equals(valueFile2) ? "unchanged" : "updated";
+            if (valueFile1 == null || valueFile2 == null) {
+                returned = valueFile1 == valueFile2 ? "unchanged" : "updated";
+            } else {
+                returned = valueFile1.equals(valueFile2) ? "unchanged" : "updated";
+            }
         }
-
         return returned;
     }
 
