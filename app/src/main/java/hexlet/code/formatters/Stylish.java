@@ -16,7 +16,7 @@ public class Stylish {
                     if (map.get("KEY STATUS").equals("unchanged")) {
                         valueFileOld = map.get("OLD VALUE");
                         returned = String.format("  %s: %s", key, valueFileOld);
-                    } else if(map.get("KEY STATUS").equals("updated")) {
+                    } else if (map.get("KEY STATUS").equals("updated")) {
                         valueFileOld = map.get("OLD VALUE");
                         valueFileNew = map.get("NEW VALUE");
                         returned = textHelpMaker(valueFileOld, valueFileNew, key);

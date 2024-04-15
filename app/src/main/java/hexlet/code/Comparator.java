@@ -46,8 +46,7 @@ public class Comparator {
                     returnedMap.put("NEW VALUE", valueFile2);
                 }
             }
-        }
-        else if (dataFile1.containsKey(key) && !dataFile2.containsKey(key)) {
+        } else if (dataFile1.containsKey(key) && !dataFile2.containsKey(key)) {
             valueFile1 = dataFile1.get(key);
             returnedMap.put("KEY STATUS", "removed");
             returnedMap.put("OLD VALUE", valueFile1);
