@@ -10,26 +10,15 @@ public class Plain {
                 .filter(map -> !map.get("KEY STATUS").equals("unchanged"))
                 .map(map -> {
                     String key = map.get("KEY").toString();
-                    Object valueFileOld;
-                    Object valueFileNew;
-                    String returned;
-                    if (map.get("KEY STATUS").equals("updated")) {
-                        valueFileOld = map.get("OLD VALUE");
-                        valueFileNew = map.get("NEW VALUE");
-                        if (valueFileOld == null || valueFileNew == null) {
-                            returned = nullHandler(valueFileOld, valueFileNew, key);
-                        } else {
-                            returned = String.format("Property '%s' was updated. From %s to %s", key,
-                                    complexCheck(valueFileOld), complexCheck(valueFileNew));
-                        }
-                    } else if (map.get("KEY STATUS").equals("removed")) {
-                        returned = String.format("Property '%s' was removed", key);
-                    } else {
-                        valueFileNew = map.get("NEW VALUE");
-                        returned = String.format("Property '%s' was added with value: %s",
-                                key, complexCheck(valueFileNew));
-                    }
-                    return returned;
+                    String keyStatusValue = map.get("KEY STATUS").toString();
+                    Object oldValue = map.get("OLD VALUE");
+                    Object newValue = map.get("NEW VALUE");
+
+                    return switch (keyStatusValue) {
+                        case "updated" -> formatUpdated(key, oldValue, newValue);
+                        case "removed" -> formatRemoved(key);
+                        default -> formatAdded(key, newValue);
+                    };
                 })
                 .collect(Collectors.joining("\n"));
     }
@@ -51,4 +40,23 @@ public class Plain {
             return obj.toString();
         }
     }
+
+    public static String formatUpdated(String key, Object oldValue, Object newValue) {
+        if (oldValue == null || newValue == null) {
+            return nullHandler(oldValue, newValue, key);
+        } else {
+            return String.format("Property '%s' was updated. From %s to %s", key,
+                    complexCheck(oldValue), complexCheck(newValue));
+        }
+    }
+
+    public static String formatRemoved(String key) {
+        return String.format("Property '%s' was removed", key);
+    }
+
+    public static String formatAdded(String key, Object newValue) {
+        return String.format("Property '%s' was added with value: %s",
+                key, complexCheck(newValue));
+    }
+
 }
