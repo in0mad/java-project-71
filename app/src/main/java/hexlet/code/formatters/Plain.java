@@ -5,35 +5,20 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Plain {
-    public static String plain(Map<String, Map<String, Object>> keyStatus) {
-        return keyStatus.entrySet().stream()
-                .filter(entry -> {
-                    Map<String, Object> temp = entry.getValue();
-                    return !temp.get("Key status").equals("unchanged");
-                })
-                .map(entry -> {
-                    String key = entry.getKey();
-                    Map<String, Object> temp = entry.getValue();
-                    Object valueFileOld;
-                    Object valueFileNew;
-                    String returned;
-                    if (temp.get("Key status").equals("updated")) {
-                        valueFileOld = temp.get("Old value");
-                        valueFileNew = temp.get("New value");
-                        if (valueFileOld == null || valueFileNew == null) {
-                            returned = nullHandler(valueFileOld, valueFileNew, key);
-                        } else {
-                            returned = String.format("Property '%s' was updated. From %s to %s", key,
-                                    complexCheck(valueFileOld), complexCheck(valueFileNew));
-                        }
-                    } else if (temp.get("Key status").equals("removed")) {
-                        returned = String.format("Property '%s' was removed", key);
-                    } else {
-                        valueFileNew = temp.get("New value");
-                        returned = String.format("Property '%s' was added with value: %s",
-                                key, complexCheck(valueFileNew));
-                    }
-                    return returned;
+    public static String plain(List<Map<String, Object>> keyStatus) {
+        return keyStatus.stream()
+                .filter(map -> !map.get("KEY STATUS").equals("unchanged"))
+                .map(map -> {
+                    String key = map.get("KEY").toString();
+                    String keyStatusValue = map.get("KEY STATUS").toString();
+                    Object oldValue = map.get("OLD VALUE");
+                    Object newValue = map.get("NEW VALUE");
+
+                    return switch (keyStatusValue) {
+                        case "updated" -> formatUpdated(key, oldValue, newValue);
+                        case "removed" -> formatRemoved(key);
+                        default -> formatAdded(key, newValue);
+                    };
                 })
                 .collect(Collectors.joining("\n"));
     }
@@ -55,4 +40,23 @@ public class Plain {
             return obj.toString();
         }
     }
+
+    public static String formatUpdated(String key, Object oldValue, Object newValue) {
+        if (oldValue == null || newValue == null) {
+            return nullHandler(oldValue, newValue, key);
+        } else {
+            return String.format("Property '%s' was updated. From %s to %s", key,
+                    complexCheck(oldValue), complexCheck(newValue));
+        }
+    }
+
+    public static String formatRemoved(String key) {
+        return String.format("Property '%s' was removed", key);
+    }
+
+    public static String formatAdded(String key, Object newValue) {
+        return String.format("Property '%s' was added with value: %s",
+                key, complexCheck(newValue));
+    }
+
 }

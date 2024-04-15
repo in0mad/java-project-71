@@ -2,6 +2,7 @@ package hexlet.code;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -16,7 +17,7 @@ public class Differ {
         Map<String, Object> parseFile1 = Parser.parse(dataFile1, defineFormat(absolutePath1));
         Map<String, Object> parseFile2 = Parser.parse(dataFile2, defineFormat(absolutePath2));
 
-        Map<String, Map<String, Object>> keyInfo = Comparator.collectKeyStatus(parseFile1, parseFile2);
+        List<Map<String, Object>> keyInfo = Comparator.collectKeyStatus(parseFile1, parseFile2);
         return Formatter.format(keyInfo, format);
     }
 

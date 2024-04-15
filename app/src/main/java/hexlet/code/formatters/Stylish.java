@@ -1,41 +1,24 @@
 package hexlet.code.formatters;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-
 public class Stylish {
-    public static String stylish(Map<String, Map<String, Object>> keyStatus) {
-        return keyStatus.entrySet().stream()
-                .map(entry -> {
-                    String key = entry.getKey();
-                    Map<String, Object> temp = entry.getValue();
-                    Object valueFileOld;
-                    Object valueFileNew;
-                    String returned;
-                    if (temp.get("Key status").equals("unchanged") || temp.get("Key status").equals("updated")) {
-                        valueFileOld = temp.get("Old value");
-                        valueFileNew = temp.get("New value");
-                        if (valueFileOld == null || valueFileNew == null) {
-                            returned = nullHandler(valueFileOld, valueFileNew, key);
-                        } else {
-                            returned = valueFileOld.equals(valueFileNew)
-                                    ? String.format("  %s: %s", key, valueFileOld.toString())
-                                    : String.format("- %s: %s\n"
-                                    + "  + %s: %s", key, valueFileOld, key, valueFileNew.toString());
-                        }
-                    } else if (temp.get("Key status").equals("removed")) {
-                        valueFileOld = temp.get("Old value");
-                        returned = valueFileOld == null
-                                ? String.format("- %s: %s", key, null)
-                                : String.format("- %s: %s", key, valueFileOld.toString());
-                    } else {
-                        valueFileNew = temp.get("New value");
-                        returned = valueFileNew == null
-                                ? String.format("+ %s: %s", key, null)
-                                : String.format("+ %s: %s", key, valueFileNew.toString());
-                    }
-                    return returned;
+    public static String stylish(List<Map<String, Object>> keyStatus) {
+        return keyStatus.stream()
+                .map(map -> {
+                    String key = map.get("KEY").toString();
+                    String keyStatusValue = map.get("KEY STATUS").toString();
+                    Object oldValue = map.get("OLD VALUE");
+                    Object newValue = map.get("NEW VALUE");
+
+                    return switch (keyStatusValue) {
+                        case "unchanged" -> formatUnchanged(key, oldValue);
+                        case "updated" -> formatUpdated(key, oldValue, newValue);
+                        case "removed" -> formatRemoved(key, oldValue);
+                        default -> formatAdded(key, newValue);
+                    };
                 })
                 .collect(Collectors.joining("\n  ", "{\n  ", "\n}"));
     }
@@ -43,12 +26,37 @@ public class Stylish {
     public static String nullHandler(Object valueFileOld, Object valueFileNew, String key) {
         if (valueFileOld == null && valueFileNew != null) {
             return String.format("- %s: %s\n"
-                    + "  + %s: %s", key, null, key, valueFileNew.toString());
+                    + "  + %s: %s", key, null, key, valueFileNew);
         } else if (valueFileOld != null && valueFileNew == null) {
             return String.format("- %s: %s\n"
-                    + "  + %s: %s", key, valueFileOld.toString(), key, null);
+                    + "  + %s: %s", key, valueFileOld, key, null);
         } else {
             return String.format("  %s: %s", key, null);
         }
+    }
+
+    public static String formatUnchanged(String key, Object oldValue) {
+        return String.format("  %s: %s", key, oldValue);
+    }
+
+    public static String formatUpdated(String key, Object oldValue, Object newValue) {
+        if (oldValue == null || newValue == null) {
+            return nullHandler(oldValue, newValue, key);
+        } else {
+            if (oldValue.equals(newValue)) {
+                return String.format("  %s: %s", key, oldValue);
+            } else {
+                return String.format("- %s: %s\n"
+                        + "  + %s: %s", key, oldValue, key, newValue);
+            }
+        }
+    }
+
+    public static String formatRemoved(String key, Object oldValue) {
+        return String.format("- %s: %s", key, oldValue);
+    }
+
+    public static String formatAdded(String key, Object newValue) {
+        return String.format("+ %s: %s", key, newValue);
     }
 }
