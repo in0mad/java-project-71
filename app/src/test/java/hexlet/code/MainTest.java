@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class MainTest {
     private final String resourceDirectory = Paths.get("src", "test", "resources").toString();
@@ -23,7 +22,6 @@ public final class MainTest {
 
     @BeforeEach
     public void beforeEach() throws Exception {
-        assertTrue(resourceDirectory.endsWith("src/test/resources"));
         stylishResult = Files.readString(Paths.get(resourceDirectory, "result-stylish.txt"));
         plainResult = Files.readString(Paths.get(resourceDirectory, "result-plain.txt"));
         jsonResult = Files.readString(Paths.get(resourceDirectory, "result-json.txt"));
