@@ -23,12 +23,6 @@ public class Plain {
                 .collect(Collectors.joining("\n"));
     }
 
-    public static String nullHandler(Object valueFileOld, Object valueFileNew, String key) {
-        return valueFileOld == null && valueFileNew != null
-                ? String.format("Property '%s' was updated. From %s to %s", key, null, complexCheck(valueFileNew))
-                : String.format("Property '%s' was updated. From %s to %s", key, complexCheck(valueFileOld), null);
-    }
-
     public static String complexCheck(Object obj) {
         if (obj == null) {
             return "null";
@@ -42,12 +36,9 @@ public class Plain {
     }
 
     public static String formatUpdated(String key, Object oldValue, Object newValue) {
-        if (oldValue == null || newValue == null) {
-            return nullHandler(oldValue, newValue, key);
-        } else {
+
             return String.format("Property '%s' was updated. From %s to %s", key,
                     complexCheck(oldValue), complexCheck(newValue));
-        }
     }
 
     public static String formatRemoved(String key) {
