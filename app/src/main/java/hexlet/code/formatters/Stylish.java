@@ -13,30 +13,18 @@ public class Stylish {
                     Object oldValue = map.get("OLD VALUE");
                     Object newValue = map.get("NEW VALUE");
 
-                    return switch (keyStatusValue) {
-                        case "unchanged" -> formatUnchanged(key, oldValue);
-                        case "updated" -> formatUpdated(key, oldValue, newValue);
-                        case "removed" -> formatRemoved(key, oldValue);
-                        default -> formatAdded(key, newValue);
-                    };
+                    return formatted(key, oldValue, newValue, keyStatusValue);
                 })
                 .collect(Collectors.joining("\n  ", "{\n  ", "\n}"));
     }
 
-    public static String formatUnchanged(String key, Object oldValue) {
-        return String.format("  %s: %s", key, oldValue);
-    }
-
-    public static String formatUpdated(String key, Object oldValue, Object newValue) {
-            return String.format("- %s: %s\n"
+    public static String formatted(String key, Object oldValue, Object newValue, String keyStatus) {
+        return switch (keyStatus) {
+            case "unchanged" -> String.format("  %s: %s", key, oldValue);
+            case "updated" -> String.format("- %s: %s\n"
                     + "  + %s: %s", key, oldValue, key, newValue);
-    }
-
-    public static String formatRemoved(String key, Object oldValue) {
-        return String.format("- %s: %s", key, oldValue);
-    }
-
-    public static String formatAdded(String key, Object newValue) {
-        return String.format("+ %s: %s", key, newValue);
+            case "removed" -> String.format("- %s: %s", key, oldValue);
+            default -> String.format("+ %s: %s", key, newValue);
+        };
     }
 }

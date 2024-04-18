@@ -14,11 +14,7 @@ public class Plain {
                     Object oldValue = map.get("OLD VALUE");
                     Object newValue = map.get("NEW VALUE");
 
-                    return switch (keyStatusValue) {
-                        case "updated" -> formatUpdated(key, oldValue, newValue);
-                        case "removed" -> formatRemoved(key);
-                        default -> formatAdded(key, newValue);
-                    };
+                    return formatted(key, oldValue, newValue, keyStatusValue);
                 })
                 .collect(Collectors.joining("\n"));
     }
@@ -35,19 +31,14 @@ public class Plain {
         }
     }
 
-    public static String formatUpdated(String key, Object oldValue, Object newValue) {
-
-            return String.format("Property '%s' was updated. From %s to %s", key,
+    public static String formatted(String key, Object oldValue, Object newValue, String keyStatus) {
+        return switch (keyStatus) {
+            case "updated" -> String.format("Property '%s' was updated. From %s to %s", key,
                     complexCheck(oldValue), complexCheck(newValue));
-    }
-
-    public static String formatRemoved(String key) {
-        return String.format("Property '%s' was removed", key);
-    }
-
-    public static String formatAdded(String key, Object newValue) {
-        return String.format("Property '%s' was added with value: %s",
-                key, complexCheck(newValue));
+            case "removed" -> String.format("Property '%s' was removed", key);
+            default -> String.format("Property '%s' was added with value: %s",
+                    key, complexCheck(newValue));
+        };
     }
 
 }
