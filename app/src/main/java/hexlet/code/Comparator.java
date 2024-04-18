@@ -31,17 +31,13 @@ public class Comparator {
 
     public static Map<String, Object> takeDifference(String key, Map<String, Object> dataFile1,
                                                      Map<String, Object> dataFile2) {
-        Object valueFile1;
-        Object valueFile2;
         Map<String, Object> returnedMap = new LinkedHashMap<>();
         if (!dataFile2.containsKey(key)) {
-            valueFile1 = dataFile1.get(key);
             returnedMap.put("KEY STATUS", "removed");
-            returnedMap.put("OLD VALUE", valueFile1);
+            returnedMap.put("OLD VALUE", dataFile1.get(key));
         } else if (!dataFile1.containsKey(key)) {
-            valueFile2 = dataFile2.get(key);
             returnedMap.put("KEY STATUS", "added");
-            returnedMap.put("NEW VALUE", valueFile2);
+            returnedMap.put("NEW VALUE", dataFile2.get(key));
         } else if (Objects.equals(dataFile1.get(key), dataFile2.get(key))) {
             returnedMap.put("KEY STATUS", "unchanged");
             returnedMap.put("OLD VALUE", dataFile1.get(key));
