@@ -1,6 +1,8 @@
 package hexlet.code;
 
 
+import org.codehaus.plexus.classworlds.strategy.SelfFirstStrategy;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -40,17 +42,13 @@ public class Comparator {
             valueFile2 = dataFile2.get(key);
             returnedMap.put("KEY STATUS", "added");
             returnedMap.put("NEW VALUE", valueFile2);
+        } else if (Objects.equals(dataFile1.get(key), dataFile2.get(key))) {
+            returnedMap.put("KEY STATUS", "unchanged");
+            returnedMap.put("OLD VALUE", dataFile1.get(key));
         } else {
-            valueFile1 = dataFile1.get(key);
-            valueFile2 = dataFile2.get(key);
-            if (Objects.equals(valueFile1, valueFile2)) {
-                returnedMap.put("KEY STATUS", "unchanged");
-                returnedMap.put("OLD VALUE", valueFile1);
-            } else {
-                returnedMap.put("KEY STATUS", "updated");
-                returnedMap.put("OLD VALUE", valueFile1);
-                returnedMap.put("NEW VALUE", valueFile2);
-            }
+            returnedMap.put("KEY STATUS", "updated");
+            returnedMap.put("OLD VALUE", dataFile1.get(key));
+            returnedMap.put("NEW VALUE", dataFile2.get(key));
         }
         return returnedMap;
     }
